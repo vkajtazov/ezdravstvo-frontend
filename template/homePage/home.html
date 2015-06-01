@@ -1,0 +1,55 @@
+<div style="position: absolute; top:10px; right: 10px;"   class="app-header navbar">
+    <a class="btn btn-info btn-lg " ui-sref="logIn">НАЈАВИ СЕ</a>
+    <a class="btn btn-info btn-lg"  ui-sref="registration">РЕГИСТРИРАЈ СЕ </a>
+</div>
+
+
+<h1 class="text-white  h1 block text-center text-bold" style="font-size:4em;position: absolute; top:40%; left: 40%; z-index: 999;text-shadow: 0.5px 0.5px 2px #a0a0a0">Е-ЗДРАВСТВО</h1>
+
+<h3 class="text-white" style="position: absolute; top:50%; left: 28%; z-index: 999;text-shadow: 0.5px 0.5px 2px #a0a0a0">Најлесен начин за закажување термин кај докторот кој го сакате</h3>
+
+<carousel interval="myInterval" style="height: 800px; background-color: black; ">
+    <slide ng-repeat="slide in slides" active="slide.active">
+        <img style="height: 800px; width:100%;margin:auto;" ng-src="{{slide.image}}" >
+        <div class="carousel-caption">
+            <h4>Slide {{$index}}</h4>
+            <p>{{slide.text}}</p>
+        </div>
+    </slide>
+</carousel>
+
+
+<div class="row wrapper-md">
+    <div class="col-sm-1"></div>
+    <div class="col-sm-5">
+        <div class="panel panel-default">
+            <a class="block panel padder-v bg-info item" href="">
+                <span class="text-white font-thin h1 block text-center">ЗАКАЖИ ТЕРМИН</span>
+            </a>
+            <div class="panel-body text-center" >
+
+                <span >Со Е-ЗДРАВСТВО закажувањето на термин кај вашиот доктор е лесно! Кликнете на "Закажи термин" и следете ги инструкциите! </span>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-5">
+
+        <div class="panel panel-default">
+            <a class="block panel padder-v bg-info item" href="">
+                <span class="text-white font-thin h1 block text-center">ПРЕГЛЕДАЈ УПАТИ</span>
+            </a>
+            <div class="panel-body text-center">
+
+                <span >Сакате да имате увид во вашите упати? Со клик на копшето погоре, ќе добиете пристап до сите ваши упати и информации кои ви се потребни! </span>
+
+            </div>
+        </div>
+
+    </div>
+    <div class="col-sm-1"></div>
+</div>
+<div class="bg-black row wrapper-xs">
+    <div class="col-sm-1"></div>
+    <div class="col-sm-10 text-center">2015 E-здравство. Сите права се задржани </div>
+    <div class="col-sm-1"></div>
+</div>

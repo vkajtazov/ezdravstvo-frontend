@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html ng-app="iktProekt">
+<head lang="en" style="height: 100%">
+    <meta charset="UTF-8">
+    <title></title>
+
+    <link rel="stylesheet" href="web/css/bootstrap.css" type="text/css" />
+    <link rel="stylesheet" href="web/css/animate.css" type="text/css" />
+    <link rel="stylesheet" href="web/css/simple-line-icons.css" type="text/css" />
+    <link rel="stylesheet" href="web/css/font-awesome.min.css" type="text/css" />
+    <link rel="stylesheet" href="web/css/font.css" type="text/css" />
+    <link rel="stylesheet" href="web/css/app.css" type="text/css" />
+
+    <style>
+        .carousel-caption h4
+        {
+            display: none;
+        }
+
+    </style>
+</head>
+
+<!--main content-->
+<body  style="height:100%" ng-controller="indexController">
+
+            <div ui-view> </div>
+            <!--<div ng-include="'template/footer.html'"></div>-->
+</body>
+<!--main content-->
+
+
+<script type="text/javascript" src="web/bower_components/jquery/dist/jquery.min.js" >  </script>
+<script type="text/javascript" src="web/bower_components/angular/angular.min.js" >  </script>
+<script type="text/javascript" src="web/bower_components/bootstrap/bootstrap.min.js"></script>
+<script type="text/javascript" src="web/bower_components/angular-bootstrap/ui-bootstrap.min.js"></script>
+<script type="text/javascript" src="web/bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
+<script type="text/javascript" src="web/bower_components/ui-router/release/angular-ui-router.js"></script>
+
+<!-- angular scripts -->
+<script type="text/javascript" src="app.js" > </script>
+
+<script type="text/javascript" src="web/js/services/loginService.js"></script>
+<script type="text/javascript" src="web/js/services/adminPanel/adminService.js"></script>
+
+<script type="text/javascript" src="web/js/controllers/indexController.js" >  </script>
+<script type="text/javascript" src="web/js/controllers/adminPanel/doctorsController.js" > </script>
+<script type="text/javascript" src="web/js/controllers/adminPanel/patientsController.js" > </script>
+<script type="text/javascript" src="web/js/controllers/loginController.js"></script>
+<!-- / angular scripts -->
+</html>

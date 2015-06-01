@@ -1,0 +1,48 @@
+<div ng-controller="doctorsController">
+    <div class="row">
+        <div class="col-sm-10" style="margin: auto">
+            <div class="panel panel-info">
+                <div class="panel-heading font-bold">Форма за регистрација</div>
+                <div class="panel-body">
+                    <form novalidate>
+                        <div class="form-group">
+                            <labell>Име</labell>
+                            <input type="text" ng-model="doctor.firstName" class="form-control"
+                                   placeholder="Корисничко име">
+                        </div>
+                        <div class="form-group">
+                            <label>Презиме</label>
+                            <input type="text" ng-model="doctor.lastName" class="form-control" placeholder="Презиме">
+                        </div>
+                        <div class="form-group">
+                            <label>Дата на раѓање</label>
+                            <input type="date" ng-model="doctor.birthDate" class="form-control"
+                                   placeholder="Година на раѓање">
+                        </div>
+                        <div class="form-group">
+                            <label>Град</label>
+                            <input type="text" ng-model="doctor.city" class="form-control" placeholder="Град">
+                        </div>
+                        <div class="form-group">
+                            <label>Држава</label>
+                            <input type="text" ng-model="doctor.country" class="form-control" placeholder="Држава">
+                        </div>
+                        <div class="form-group">
+                            <label>Име на болница</label>
+                            <select ng-model="doctor.hospital"
+                                    ng-options="hospital as hospital.name for hospital in allHospitals"></select>
+                        </div>
+                        <div class="form-group">
+                            <label>Професија</label>
+                            <select ng-model="doctor.specialization"
+                                    ng-options="specialization as specialization.name for specialization in allSpecializations"></select>
+                        </div>
+
+                        <button type="submit" class="btn btn-sm btn-info pull-right" ng-click="login()">Потврди</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

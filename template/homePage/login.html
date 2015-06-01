@@ -1,0 +1,23 @@
+<div class="row" ng-controller="loginController">
+    <div class="col-sm-3"></div>
+    <div class="col-sm-5 wrapper-xl" style="margin: auto">
+        <div class="panel panel-info">
+            <div class="panel-heading font-bold">Форма за регистрација</div>
+            <div class="panel-body">
+                <form novalidate>
+                    <div class="form-group">
+                        <labell>Корисничко име</labell>
+                        <input type="email" ng-model="user.username" class="form-control" placeholder="Корисничко име">
+                    </div>
+                    <div class="form-group">
+                        <label>Лозинка</label>
+                        <input type="password" ng-model="user.password" class="form-control" placeholder="Лозинка">
+                    </div>
+
+                    <button type="submit" class="btn btn-sm btn-info pull-right" ng-click="login()">Потврди</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+</div>
