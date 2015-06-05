@@ -7,7 +7,7 @@
                     <form novalidate>
                         <div class="form-group">
                             <labell>Име</labell>
-                            <input type="email" ng-model="patient.name" class="form-control"
+                            <input type="text" ng-model="patient.firstName" class="form-control"
                                    placeholder="Корисничко име">
                         </div>
                         <div class="form-group">
@@ -15,10 +15,32 @@
                             <input type="text" ng-model="patient.lastName" class="form-control" placeholder="Презиме">
                         </div>
                         <div class="form-group">
-                            <label>Дата на раѓање</label>
-                            <input type="text" ng-model="patient.birthDate" class="form-control"
-                                   placeholder="Година на раѓање">
+                            <label>Број на е-картичка</label>
+                            <input type="text" ng-model="patient.username" class="form-control" placeholder="Број на е-картичка">
                         </div>
+
+                        <div class="form-group">
+                            <label>Е-меил</label>
+                            <input type="email" ng-model="patient.email" class="form-control" placeholder="Е-меил">
+                        </div>
+
+                        <div class="form-group">
+                            <label>Единствен матичен број</label>
+                            <input type="text" ng-model="patient.umcn" class="form-control"
+                                   placeholder="Единствен матичен број">
+                        </div>
+                        <div class="form-group">
+                        <label>Дата на раѓање</label>
+                        <input type="date" ng-model="patient.dateOfBirth" class="form-control"
+                               placeholder="Дата на раѓање">
+                        </div>
+
+                        <div class="form-group">
+                            <label>Пол</label>
+                            <select ng-model="patient.gender"
+                                    ng-options="gender.id as gender.name for gender in genders"></select>
+                        </div>
+
                         <div class="form-group">
                             <label>Град</label>
                             <input type="text" ng-model="patient.city" class="form-control" placeholder="Град">
@@ -34,23 +56,18 @@
                         </div>
 
                         <div class="form-group">
-                            <label>Пол</label>
-                            <select ng-model="patient.gender"
-                                    ng-options="gender.id as gender.name for gender in genders"></select>
-                        </div>
-
-                        <div class="form-group">
                             <label>Поштенски код</label>
                             <input type="text" ng-model="patient.postCode" class="form-control" placeholder="Поштенски код">
                         </div>
 
                         <div class="form-group">
                             <label>Доктор</label>
-                            <select ng-model="patient.doctor"
-                                    ng-options="doctor as doctor.firstName for doctor in allDoctors"></select>
+                            <select ng-model="patient.primary_doctor.id"
+                                    ng-options="doctor.id as doctor.firstName for doctor in allDoctors" ></select>
                         </div>
 
-                        <button type="submit" class="btn btn-sm btn-info pull-right" ng-click="login()">Потврди</button>
+                        <button type="submit" class="btn btn-sm btn-info pull-right" ng-if="addPacientState" ng-click="addPatient()">Потврди</button>
+                        <button type="submit" class="btn btn-sm btn-info pull-right" ng-if="!addPacientState" ng-click="updatePatient()">Зачувај промени</button>
                     </form>
                 </div>
             </div>

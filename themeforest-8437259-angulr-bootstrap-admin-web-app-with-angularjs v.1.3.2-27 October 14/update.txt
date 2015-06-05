@@ -10,7 +10,7 @@
                   move the components to "src/vendor/", 
                   split the "src/js/controllers.js" to "js/controllers/**"
                   split the "src/js/directives.js" to "js/directives/**"
-                  split the "src/js/services.js" to "js/services/**"
+                  split the "src/js/mainService.js" to "js/services/**"
                   split the "src/js/filters.js" to "js/filters/**"
 
 #### Bugfixes:

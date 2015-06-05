@@ -1,10 +1,17 @@
 <div ng-controller="doctorsController">
     <div class="row">
-        <div class="col-sm-10" style="margin: auto">
+        <div class="col-sm-10 wrapper" style="margin: auto">
             <div class="panel panel-info">
                 <div class="panel-heading font-bold">Форма за регистрација</div>
                 <div class="panel-body">
                     <form novalidate>
+                        <div class="form-group">
+                            <label>Број на е-картичка {{doctor.username}}</label><br>
+
+                            <label>Единствен матичен број {{ doctor.umcn }}</label> <br>
+                            <label>Болница {{doctor.hospital}}</label>
+                            <!--<input type="text" ng-model="doctor.username" class="form-control" placeholder="Број на е-картичка">-->
+                        </div>
                         <div class="form-group">
                             <labell>Име</labell>
                             <input type="text" ng-model="doctor.firstName" class="form-control"
@@ -15,21 +22,14 @@
                             <input type="text" ng-model="doctor.lastName" class="form-control" placeholder="Презиме">
                         </div>
 
-                        <div class="form-group">
-                            <label>Број на е-картичка</label>
-                            <input type="text" ng-model="doctor.username" class="form-control" placeholder="Број на е-картичка">
-                        </div>
+
 
                         <div class="form-group">
                             <label>Е-меил</label>
                             <input type="email" ng-model="doctor.email" class="form-control" placeholder="Е-меил">
                         </div>
-                        
-                        <div class="form-group">
-                            <label>Единствен матичен број</label>
-                            <input type="text" ng-model="doctor.umcn" class="form-control"
-                                   placeholder="Единствен матичен број">
-                        </div>
+
+
 
                         <div class="form-group">
                             <label>Дата на раѓање</label>
@@ -61,20 +61,14 @@
                             <input type="text" ng-model="doctor.postCode" class="form-control" placeholder="Поштенски код">
                         </div>
 
-                        <div class="form-group">
-                            <label>Име на болница</label>
-                            <select ng-model="doctor.hospital.id"
-                                    ng-options="hospital.id as hospital.name for hospital in allHospitals"></select>
-                        </div>
+
                         <div class="form-group">
                             <label>Професија</label>
                             <select ng-model="doctor.specialization.id"
                                     ng-options="specialization.id as specialization.name for specialization in allSpecializations"></select>
                         </div>
 
-
-                        <button type="submit" class="btn btn-sm btn-info pull-right" ng-if="addDoctorState" ng-click="addDoctor()">Потврди</button>
-                        <button type="submit" class="btn btn-sm btn-info pull-right" ng-if="!addDoctorState" ng-click="updateDoctor()">Зачувај промени</button>
+                        <button type="submit" class="btn btn-sm btn-info pull-right"  ng-click="updateDoctor()">Зачувај промени</button>
                     </form>
                 </div>
             </div>
@@ -82,4 +76,3 @@
 
     </div>
 </div>
-
