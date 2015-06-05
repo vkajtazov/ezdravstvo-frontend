@@ -12,7 +12,7 @@ iktProekt.service('loginService', function($http){
             return $http({
 
                     method: "POST",
-                    url: '',
+                    url: 'https://ezdravstvo.herokuapp.com/rest/user/authenticate',
                     data: {
                         user: user
                     }
