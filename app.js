@@ -182,35 +182,48 @@ iktProekt.config(
 
 
             //doctors
-            $stateProvider.state('doctors', {
-                url: '/doctors',
+            $stateProvider.state('doctor', {
+                url: '/doctor',
                 templateUrl : 'template/doctorPanel/home.html'
 
             })
-            $stateProvider.state('doctors.info', {
+            $stateProvider.state('doctor.info', {
                 url: '/info',
                 templateUrl : 'template/doctorPanel/info.html'
 
             })
 
 
-            $stateProvider.state('doctors.appointments', {
+            $stateProvider.state('doctor.appointments', {
                 url: '/appointments',
                 templateUrl : 'template/doctorPanel/appointments.html'
 
             })
-            $stateProvider.state('doctors.appointments.newAppointment', {
+            $stateProvider.state('doctor.appointments.newAppointment', {
                 url: '/new-appointment',
                 templateUrl : 'template/doctorPanel/addNewAppointment.html'
 
             })
 
 
-            $stateProvider.state('doctors.appointments.newDiagnosis', {
+            $stateProvider.state('doctor.appointments.newDiagnosis', {
                 url: '/add-diagnosis',
                 templateUrl : 'template/doctorPanel/addNewDiagnosis.html'
 
             })
+
+            $stateProvider.state('doctor.appointments.referrals', {
+                url: '/referrals',
+                templateUrl : 'template/doctorPanel/referrals.html'
+
+            })
+
+            $stateProvider.state('doctor.appointments.newReferrals', {
+                url: '/add-referrals',
+                templateUrl : 'template/doctorPanel/addNewReferrals.html'
+
+            })
+
 
             $stateProvider.state('patient.referrals', {
                 url: '/referrals',
