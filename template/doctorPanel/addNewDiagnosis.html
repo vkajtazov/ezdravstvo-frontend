@@ -1,0 +1,28 @@
+<div ng-controller="diagnosisController">
+    <div class="row">
+        <div class="col-sm-10" style="margin: auto">
+            <div class="panel panel-info">
+                <div class="panel-heading font-bold">Форма за внесување дијагноза </div>
+                <div class="panel-body">
+                    <form novalidate>
+                        <div class="form-group">
+                            <labell>Дата на издавање на дијагнозата</labell>
+                            <input type="text" ng-model="dianosis.date" class="form-control"
+                                   placeholder="Дата на издавање на дијагнозата">
+                        </div>
+                        <div class="form-group">
+                            <labell>Пациент</labell>
+                            <input type="text" disabled ng-model="appointment.pacient.name"/>
+                        </div>
+
+
+
+                        <button type="submit" class="btn btn-sm btn-info pull-right" ng-if="adddiagnosisState" ng-click="adddiagnosis(diagnosis)">Потврди</button>
+                        <button type="submit" class="btn btn-sm btn-info pull-right" ng-if="!adddiagnosisState" ng-click="updatediagnosis()">Зачувај промени</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

@@ -1,0 +1,103 @@
+<div ng-controller="doctorsController">
+    <div class="wrapper-md">
+        <div class="row" ui-view>
+
+            <div class="col-sm-10 wrapper-md">
+                <button class="btn btn-success  pull-right btn-info" ng-click="goToAddNewDoctorPage()" >Додади нов доктор</button>
+                </div>
+                <div class="col-sm-10" >
+
+
+
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+
+                        Доктори
+                        <span class="label bg-danger  m-t-xs">{{ allDoctors.length}}</span>
+                    </div>
+
+                    <div class="row wrapper">
+                <div class="col-sm-5 m-b-xs">
+                    <select class="input-sm form-control w-sm inline v-middle">
+                        <option value="0">Bulk action</option>
+                        <option value="1">Delete selected</option>
+                        <option value="2">Bulk edit</option>
+                        <option value="3">Export</option>
+                    </select>
+                    <button class="btn btn-sm btn-default">Apply</button>
+                </div>
+                <div class="col-sm-4">
+                </div>
+                <div class="col-sm-3">
+
+                        <input type="text" class=" form-control" ng-model="doctorsFilter" placeholder="Пребарај..">
+
+                </div>
+            </div>
+            <div class="table-responsive">
+                <table class="table table-striped b-t b-light">
+                    <thead>
+                    <tr>
+                        <th style="width:20px;">
+                            <label class="i-checks m-b-none">
+                                <input type="checkbox"><i></i>
+                            </label>
+                        </th>
+                        <th>Име </th>
+                        <th>Презиме</th>
+                        <th>Болница</th>
+                        <th>Е-меил</th>
+                        <th>Специјализација</th>
+                        <th>Акции</th>
+                        <!--<th style="width:30px;"></th>-->
+                    </tr>
+                    </thead>
+                    <tbody>
+
+                    <tr ng-repeat="doctor in allDoctors | filter:doctorsFilter">
+                        <td><label class="i-checks m-b-none"><input type="checkbox" name="post[]"><i></i></label></td>
+                        <td>{{doctor.firstName }}</td>
+                        <td>{{doctor.lastName }}</td>
+                        <td>{{doctor.hospital.name}}</td>
+                        <td>{{doctor.email}}</td>
+                        <td>{{doctor.specialization.name }}</td>
+                        <td><butoon class="btn btn-info" ng-click="editDoctor(doctor.id)">ИЗМЕНИ</butoon>
+                            &nbsp; <butoon class="btn btn-danger" ng-click="deleteDoctor(doctor.id)">ИЗБРИШИ</butoon></td>
+
+                    </tr>
+
+                    </tbody>
+                </table>
+            </div>
+            <footer class="panel-footer">
+                <div class="row">
+                    <div class="col-sm-4 hidden-xs">
+                        <select class="input-sm form-control w-sm inline v-middle">
+                            <option value="0">Bulk action</option>
+                            <option value="1">Delete selected</option>
+                            <option value="2">Bulk edit</option>
+                            <option value="3">Export</option>
+                        </select>
+                        <button class="btn btn-sm btn-default">Apply</button>
+                    </div>
+                    <div class="col-sm-4 text-center">
+                        <small class="text-muted inline m-t-sm m-b-sm">showing 20-30 of 50 items</small>
+                    </div>
+                    <div class="col-sm-4 text-right text-center-xs">
+                        <ul class="pagination pagination-sm m-t-none m-b-none">
+                            <li><a href><i class="fa fa-chevron-left"></i></a></li>
+                            <li><a href>1</a></li>
+                            <li><a href>2</a></li>
+                            <li><a href>3</a></li>
+                            <li><a href>4</a></li>
+                            <li><a href>5</a></li>
+                            <li><a href><i class="fa fa-chevron-right"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </footer>
+        </div>
+    </div></div>
+    </div>
+    </div>
+</div>
