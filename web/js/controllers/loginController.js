@@ -8,6 +8,7 @@ iktProekt.controller('loginController', function ($scope, loginService, $locatio
     $scope.login = function () {
 
         loginService.login($scope.user).success(function (data) {
+            console.log("Login service data",data);
             authenticationService.setUserAuthenticated(data);
 
             role = authenticationService.getCurrentUser().role ;

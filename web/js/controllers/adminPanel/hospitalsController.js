@@ -34,7 +34,7 @@ iktProekt.controller('hospitalsController', function ($scope, loginService, $loc
 
         mainService.deleteHospital(hospitalId).success(function(){
 
-
+            $state.reload();
 
 
         }).
@@ -56,14 +56,14 @@ iktProekt.controller('hospitalsController', function ($scope, loginService, $loc
     {
 
         mainService.addHospital(hospital).success(function(){
-            $state.go('admin.hospitals');
+            $state.go('admin.hospitals', {}, {reload: true});
         });
     }
 
     $scope.updateHospital= function()
     {
         mainService.addHospital($scope.hospital).success(function (data) {
-            $state.go('admin.hospitals');
+            $state.go('admin.hospitals', {}, {reload: true});
 
         }).error(function(status, headers){
             console.log(status);

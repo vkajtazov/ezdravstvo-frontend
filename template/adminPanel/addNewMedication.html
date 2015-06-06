@@ -1,0 +1,26 @@
+<div ng-controller="medicationsController">
+    <div class="row">
+        <div class="col-sm-10" style="margin: auto">
+            <div class="panel panel-info">
+                <div class="panel-heading font-bold">Додади нов лек</div>
+                <div class="panel-body">
+                    <form novalidate>
+                        <div class="form-group">
+                            <label>Лек:</label>
+                            <input type="text" ng-model="medication.name" class="form-control" placeholder="Лек"> </input>
+                        </div>
+                        <div class="form-group">
+                            <label>Производител:</label>
+                            <input type="text" ng-model="medication.company" class="form-control" placeholder="Производител"> </input>
+                        </div>
+
+                        <button type="submit" class="btn btn-sm btn-info pull-right" ng-if="addMedicationState" ng-click="addMedication()">Потврди</button>
+                        <button type="submit" class="btn btn-sm btn-info pull-right" ng-if="!addMedicationState" ng-click="updateMedication()">Зачувај промени</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+

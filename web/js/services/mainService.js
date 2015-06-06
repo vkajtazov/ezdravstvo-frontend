@@ -63,7 +63,23 @@ iktProekt.service('mainService', function($http){
             url: 'https://ezdravstvo.herokuapp.com/rest/hospitals/'+hospitalId
         });
     }
+    service.getMedicationById = function(medicationId)
+    {
+        return $http({
 
+            method: "GET",
+            url: 'https://ezdravstvo.herokuapp.com/rest/medications/'+medicationId
+        });
+    }
+
+    service.getSpecializationById = function(specializationId)
+    {
+        return $http({
+
+            method: "GET",
+            url: 'https://ezdravstvo.herokuapp.com/rest/specializations/'+specializationId
+        });
+    }
 
 
         service.getAllHospitals = function()
@@ -88,6 +104,16 @@ iktProekt.service('mainService', function($http){
         });
 
     }
+    service.getAllMedications = function()
+    {
+        return $http({
+
+            method: "GET",
+            url: 'https://ezdravstvo.herokuapp.com/rest/medications'
+        });
+
+    }
+
 
     service.addPatient = function(patient)
     {
@@ -118,7 +144,36 @@ iktProekt.service('mainService', function($http){
             data: hospital
         });
     }
+    service.addMedication = function(medication)
+    {
+        console.log("medications", medication);
+        return $http({
+            method: "POST",
+            url: 'https://ezdravstvo.herokuapp.com/rest/medications',
+            data: medication
+        });
+    }
 
+
+    service.addSpecialization = function(specialization)
+    {
+        console.log("medications", specialization);
+        return $http({
+            method: "POST",
+            url: 'https://ezdravstvo.herokuapp.com/rest/specializations',
+            data: specialization
+        });
+    }
+
+    service.deleteSpecialization = function(specializationId)
+    {
+
+        return $http({
+            method: "DELETE",
+            url: 'https://ezdravstvo.herokuapp.com/rest/specializations/'+specializationId
+
+        });
+    }
 
     service.deleteDoctor = function(doctorId)
     {
@@ -145,6 +200,15 @@ iktProekt.service('mainService', function($http){
         return $http({
             method: "DELETE",
             url: 'https://ezdravstvo.herokuapp.com/rest/hospitals/'+hospitalId
+
+        });
+    }
+
+    service.deleteMedication = function(medicationId)
+    {
+        return $http({
+            method: "DELETE",
+            url: 'https://ezdravstvo.herokuapp.com/rest/medications/'+medicationId
 
         });
     }

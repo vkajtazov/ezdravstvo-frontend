@@ -49,7 +49,7 @@ iktProekt.controller('doctorsController', function ($scope, loginService, $locat
     $scope.deleteDoctor = function(doctorId)
     {
         mainService.deleteDoctor(doctorId).success(function(data){
-
+            $state.reload();
         }).
             error(function(data, status, headers, config) {
               if(status=='500')
@@ -67,6 +67,7 @@ iktProekt.controller('doctorsController', function ($scope, loginService, $locat
 
     $scope.editDoctor = function (doctorId) {
 
+        console.log("Doktor ID", doctorId);
         mainService.getDoctorById(doctorId).success(function(data){
 
             $scope.doctor = data;

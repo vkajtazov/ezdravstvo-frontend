@@ -100,8 +100,8 @@ iktProekt.config(
     [          '$stateProvider', '$urlRouterProvider',
         function ($stateProvider,   $urlRouterProvider) {
 
-            $urlRouterProvider
-                .otherwise('home');
+            //$urlRouterProvider
+            //    .otherwise('home');
             $stateProvider.state('home',{
                 url: '/home',
                 templateUrl : 'template/homePage/home.html',
@@ -162,6 +162,39 @@ iktProekt.config(
 
             })
 
+            $stateProvider.state('admin.medications',{
+                url: '/medications',
+                templateUrl : 'template/adminPanel/medications.html'
+            })
+
+            $stateProvider.state('admin.medications.newMedication',{
+                url: '/add-medication',
+                templateUrl : 'template/adminPanel/addNewMedication.html'
+            })
+
+            $stateProvider.state('admin.medications.editMedication', {
+                url: '/edit-medication',
+                templateUrl : 'template/adminPanel/addNewMedication.html'
+
+            })
+
+            $stateProvider.state('admin.specializations',{
+                url: '/specializations',
+                templateUrl : 'template/adminPanel/specializations.html'
+            })
+
+            $stateProvider.state('admin.specializations.newSpecialization',{
+                url: '/add-specialization',
+                templateUrl : 'template/adminPanel/addNewSpecialization.html'
+            })
+
+            $stateProvider.state('admin.specializations.editSpecialization', {
+                url: '/edit-specialization',
+                templateUrl : 'template/adminPanel/addNewSpecialization.html'
+
+            })
+
+
             $stateProvider.state('patient', {
                 url: '/patient',
                 templateUrl : 'template/patientPanel/home.html'
@@ -192,6 +225,11 @@ iktProekt.config(
                 templateUrl : 'template/doctorPanel/info.html'
 
             })
+            $stateProvider.state('doctor.patients', {
+                url: '/patients',
+                templateUrl : 'template/doctorPanel/patients.html'
+
+            })
 
 
             $stateProvider.state('doctor.appointments', {
@@ -206,9 +244,19 @@ iktProekt.config(
             })
 
 
-            $stateProvider.state('doctor.appointments.newDiagnosis', {
+            $stateProvider.state('doctor.patients.allDiagnosisForPacient.newDiagnosis', {
                 url: '/add-diagnosis',
                 templateUrl : 'template/doctorPanel/addNewDiagnosis.html'
+
+            })
+            $stateProvider.state('doctor.patients.allDiagnosisForPacient', {
+                url: '/all-diagnosis',
+                templateUrl : 'template/doctorPanel/allDiagnosisForPatient.html'
+
+            })
+            $stateProvider.state('doctor.patients.diagnosisPreview', {
+                url: '/diagnosis-preview',
+                templateUrl : 'template/doctorPanel/previewOfDiagnosis.html'
 
             })
 

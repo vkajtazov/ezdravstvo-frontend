@@ -29,7 +29,7 @@ iktProekt.controller('patientsController', function($scope, loginService, $locat
         console.log($scope.patient);
 
         mainService.addPatient($scope.patient).success(function (data) {
-            $state.go('admin.patients');
+            $state.go('admin.patients', {}, {reload: true});
         }).error(function(response){
             console.log(response);
         });
@@ -39,7 +39,7 @@ iktProekt.controller('patientsController', function($scope, loginService, $locat
     {
 
         mainService.deletePacient(pacientId).success(function(data){
-
+            $state.reload();
         }).
             error(function(data, status, headers, config) {
                 if(status=='500')
@@ -74,7 +74,7 @@ iktProekt.controller('patientsController', function($scope, loginService, $locat
         console.log($scope.patient);
 
         mainService.addPatient($scope.patient).success(function (data) {
-            $state.go('admin.patients');
+            $state.go('admin.patients', {}, {reload: true});
         }).error(function(response){
             console.log(response);
         });

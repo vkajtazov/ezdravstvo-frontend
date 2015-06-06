@@ -1,0 +1,22 @@
+<div ng-controller="specializationsController">
+    <div class="row">
+        <div class="col-sm-10" style="margin: auto">
+            <div class="panel panel-info">
+                <div class="panel-heading font-bold">Додади нов лек</div>
+                <div class="panel-body">
+                    <form novalidate>
+                        <div class="form-group">
+                            <label>Име:</label>
+                            <input type="text" ng-model="specialization.name" class="form-control" placeholder="Име"> </input>
+                        </div>
+
+                        <button type="submit" class="btn btn-sm btn-info pull-right" ng-if="addSpecializationState" ng-click="addSpecialization()">Потврди</button>
+                        <button type="submit" class="btn btn-sm btn-info pull-right" ng-if="!addSpecializationState" ng-click="updateSpecialization()">Зачувај промени</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+

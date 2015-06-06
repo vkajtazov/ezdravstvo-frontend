@@ -2,7 +2,7 @@
  * Created by Bojana on 6/3/2015.
  */
 
-iktProekt.controller('doctorPanelController', function ($scope, loginService, $location, $filter, $state, appointmentsService) {
+iktProekt.controller('doctorPanelController', function ($scope,$filter, loginService, $location, $filter, $state, appointmentsService, diagnosisService) {
 
 
     $scope.doctor = {}; //get doctor by id from database
@@ -11,6 +11,9 @@ iktProekt.controller('doctorPanelController', function ($scope, loginService, $l
 
     $scope.allAppointmentsForDoctor = [];
     $scope.allPacientsForDoctor = [];
+
+
+    $scope.allDiagnosisForPatitent = [];
 
 
     $scope.allAppointmentsForDoctor = appointmentsService.getAllAppointmentsForDoctor($scope.doctor.id).success(function(){
@@ -22,25 +25,56 @@ iktProekt.controller('doctorPanelController', function ($scope, loginService, $l
 
     appointmentsService.getAllPacientsForDoctor($scope.doctor.id).success(function(data)
     {
-        console.log("Data", data);
-
         $scope.allPacientsForDoctor = data;
-
+        console.log($scope.allPacientsForDoctor);
     });
 
-    console.log($scope.allAppointmentsForDoctor);
 
-    $scope.enterDiagnosis =function(appointment)
+
+
+    $scope.enterDiagnosis =function()
     {
-            $scope.currentAppointment =appointment;
-            $state.go('doctors.appointments.newDiagnosis');
+            $state.go('doctors.patients.newDiagnosis');
     }
 
+
+    //nosi na tabela so site dijagnozi na pacientot
+    $scope.viewPatientDiagnosis = function(patientId)
+    {
+        diagnosisService.getAllDiagnosisForPacient(patientId).success(function(data){
+            $scope.allDiagnosisOfPacient = data;
+            $state.go('doctor.patients.allDiagnosisForPacient');
+        });
+    }
+
+
+    $scope.viewDiagnosis = function(diagnosis)
+    {
+        $scope.currentDiagnosis = diagnosis;
+        $state.go('doctor.patients.diagnosisPreview');
+    }
 
     $scope.goToAddNewAppointmentPage = function()
     {
 
-        $state.go('doctors.appointments.newAppointment');
+        $state.go('doctors.appointments.newAppointment', {pacientId});
+    }
+
+    $scope.goToAddNewDiagnosisPage = function(){
+        $state.go('doctor.patients.allDiagnosisForPacient.newDiagnosis');
+    }
+
+    $scope.addDiagnosis = function(diagnosis)
+    {
+        diagnosis.createdAt = $filter('date')(diagnosis.data , "yyyy-dd-MM").toString().split("T")[0];
+        delete  diagnosis['data'];
+
+        // treba do sesija id-to
+        diagnosis.doctor.id = $scope.doctor.id;
+
+        diagnosisService.addNewDiagnosis(diagnosis).success(function(){
+            $location.path('doctor/patients');
+            })
     }
 
 });

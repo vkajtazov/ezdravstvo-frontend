@@ -1,4 +1,4 @@
-<div ng-controller="diagnosisController">
+<div  >
     <div class="row">
         <div class="col-sm-10" style="margin: auto">
             <div class="panel panel-info">
@@ -7,18 +7,43 @@
                     <form novalidate>
                         <div class="form-group">
                             <labell>Дата на издавање на дијагнозата</labell>
-                            <input type="text" ng-model="dianosis.date" class="form-control"
+                            <input type="date" ng-model="diagnosis.data" class="form-control"
                                    placeholder="Дата на издавање на дијагнозата">
                         </div>
                         <div class="form-group">
+
                             <labell>Пациент</labell>
-                            <input type="text" disabled ng-model="appointment.pacient.name"/>
+                            <select ng-model="diagnosis.patient.id"
+                                    ng-options="pacient.id as pacient.firstName  for pacient in allPacientsForDoctor"></select>
+                        </div>
+                        <div class="form-group">
+
+                            <labell>Дијагноза</labell><br>
+                           <textarea ng-model="diagnosis.diagnosis" rows="10" class="form-control" >
+
+
+                           </textarea>
+                        </div>
+
+
+                        <button class="btn btn-info" ng-click="prscription=true">Додади рецепта</button>
+
+
+
+                        <div class="form-group" ng-show="prscription==true">
+
+                            <label>Додади лек во рецептата:</label>
+
+                            <select ng-model="diagnosis.perscription.medication.id"
+                                    ng-options="medication.id as medication.name  for medication in allMedications"></select>
+
+
                         </div>
 
 
 
-                        <button type="submit" class="btn btn-sm btn-info pull-right" ng-if="addDiagnosisState" ng-click="addDiagnosis(diagnosis)">Потврди</button>
-                        <button type="submit" class="btn btn-sm btn-info pull-right" ng-if="!addDiagnosisState" ng-click="updateDiagnosis()">Зачувај промени</button>
+                        <button type="submit" class="btn btn-sm btn-info pull-right"  ng-click="addDiagnosis(diagnosis)">Потврди</button>
+
                     </form>
                 </div>
             </div>

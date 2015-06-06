@@ -7,6 +7,8 @@ iktProekt.service('appointmentsService', function ($http) {
     var appointment = {};
 
 
+    var doctorTocken = 'petar:9c8d48331b8b1154e34179ab7a159c1d';
+
     appointment.getAllAppointmentsForDoctor = function(doctorId)
     {
         return $http({
@@ -22,13 +24,15 @@ iktProekt.service('appointmentsService', function ($http) {
 
     appointment.getAllPacientsForDoctor = function(doctorId)
     {
-        //NOW RETURNS ALL NEED TO RETURN ONLY FOR THIS DOCTOR
+
+
         return $http({
 
             method: "GET",
-            url: 'https://ezdravstvo.herokuapp.com/rest/patients'
-
-
+            url: 'https://ezdravstvo.herokuapp.com/rest/patients/byDoctor',
+            headers : {
+                'X-Auth-Token' : doctorTocken
+            }
 
         });
     }
