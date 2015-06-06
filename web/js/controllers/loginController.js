@@ -1,7 +1,7 @@
 /**
  * Created by Bojana on 5/24/2015.
  */
-iktProekt.controller('loginController', function ($scope, loginService, $location, authenticationService, enums) {
+iktProekt.controller('loginController', function ($cookies, $scope, loginService, $location, authenticationService, enums) {
 
     $scope.user = {};
 
@@ -9,23 +9,37 @@ iktProekt.controller('loginController', function ($scope, loginService, $locatio
 
         loginService.login($scope.user).success(function (data) {
             console.log("Login service data",data);
-            authenticationService.setUserAuthenticated(data);
+
+           authenticationService.setUserAuthenticated(data);
+
+
 
             role = authenticationService.getCurrentUser().role ;
+
+
 
            switch(role) {
                case enums.Roles.ROLE_ADMIN:
                    $location.path("/admin");
+                   break;
                case enums.Roles.ROLE_DOCTOR:
+
                    $location.path("/doctor");
+                   break;
+
                case enums.Roles.ROLE_PATIENT:
-                   console.log("role: "+ role);
+
                    $location.path("/patient");
+                   break;
+               default:
+                   console.log("Invalid role");
+
            }
         }).error(function (e) {
             console.log(e);
         });
     }
+
 
 });
 

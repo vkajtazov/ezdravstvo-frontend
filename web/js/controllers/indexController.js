@@ -3,7 +3,7 @@
  */
 
 
-iktProekt.controller('indexController', function($scope){
+iktProekt.controller('indexController', function($scope, $cookies, $location){
 
 
     $scope.myInterval = 5000;
@@ -20,6 +20,13 @@ iktProekt.controller('indexController', function($scope){
     }
 
 
+    $scope.logout =function()
+    {
+
+        delete  $cookies['currentUser'] ;
+        delete  $cookies['usertoken'];
+        $location.path('/');
+    }
 
 
 

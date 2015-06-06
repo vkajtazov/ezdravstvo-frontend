@@ -127,6 +127,7 @@ iktProekt.service('mainService', function($http){
 
     service.addDoctor= function(doctor)
     {
+        console.log(doctor);
         return $http({
             method: "POST",
             url: 'https://ezdravstvo.herokuapp.com/rest/doctors',
@@ -134,6 +135,16 @@ iktProekt.service('mainService', function($http){
         });
 
     }
+    service.updateDoctor = function(doctor)
+    {
+        console.log(doctor);
+        return $http({
+            method: "PUT",
+            url: 'https://ezdravstvo.herokuapp.com/rest/doctors',
+            data: doctor
+        });
+    }
+
 
     service.addHospital =function(hospital)
     {

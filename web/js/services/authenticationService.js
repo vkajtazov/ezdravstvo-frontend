@@ -5,13 +5,16 @@ iktProekt.service('authenticationService', function ($cookies, enums, roleServic
 
         data['user'].role =  roleService.getRoleforName(data['user'].role);
         $cookies['usertoken'] = data['token'];
-        $cookies['currentUser'] = data['user'];
+
+        $cookies['currentUser'] = JSON.stringify(data['user']);
+
     };
 
     this.getCurrentUser = function () {
-        var r = $cookies['currentUser'];
-        console.log(":::ROLE: "+ r.role);
-        return $cookies['currentUser'];
+
+
+       currentUser =  (typeof $cookies['currentUser'] != 'undefined') ? JSON.parse($cookies['currentUser']) : '';
+        return currentUser;
     };
 
     this.isLoggedIn = function () {

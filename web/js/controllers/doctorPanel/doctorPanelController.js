@@ -2,10 +2,10 @@
  * Created by Bojana on 6/3/2015.
  */
 
-iktProekt.controller('doctorPanelController', function ($scope,$filter, loginService, $location, $filter, $state, appointmentsService, diagnosisService) {
+iktProekt.controller('doctorPanelController', function ($scope,$filter,$cookies, loginService,mainService,  $location, $filter, $state, appointmentsService, diagnosisService) {
 
 
-    $scope.doctor = {}; //get doctor by id from database
+    $scope.doctor = JSON.parse($cookies['currentUser']);
 
 
 
@@ -16,12 +16,24 @@ iktProekt.controller('doctorPanelController', function ($scope,$filter, loginSer
     $scope.allDiagnosisForPatitent = [];
 
 
-    $scope.allAppointmentsForDoctor = appointmentsService.getAllAppointmentsForDoctor($scope.doctor.id).success(function(){
+    mainService.getAllSpecializations().success(function(data){
+        $scope.allSpecializations = data;
+    }) ;
 
+     appointmentsService.getAllAppointmentsForDoctor($scope.doctor.id).success(function(data){
 
+    //TODO
+    //     $scope.allAppointmentsForDoctor = data;
 
 
     });
+
+
+    console.log($scope.allAppointmentsForDoctor);
+    $scope.genders = [
+        {"id" : "M" , "name": "Masko"},
+        {"id" : "F" , "name": "Zensko"},
+    ]
 
     appointmentsService.getAllPacientsForDoctor($scope.doctor.id).success(function(data)
     {
@@ -41,7 +53,9 @@ iktProekt.controller('doctorPanelController', function ($scope,$filter, loginSer
     //nosi na tabela so site dijagnozi na pacientot
     $scope.viewPatientDiagnosis = function(patientId)
     {
+
         diagnosisService.getAllDiagnosisForPacient(patientId).success(function(data){
+            console.log("DIJAGNOZA");
             $scope.allDiagnosisOfPacient = data;
             $state.go('doctor.patients.allDiagnosisForPacient');
         });
@@ -76,5 +90,16 @@ iktProekt.controller('doctorPanelController', function ($scope,$filter, loginSer
             $location.path('doctor/patients');
             })
     }
+
+
+    $scope.updateDoctor = function(doctor)
+    {
+            console.log(doctor);
+        mainService.updateDoctor(doctor).success(function(data){
+
+               $cookies['currentUser']= JSON.stringify(data);
+        });
+    }
+
 
 });

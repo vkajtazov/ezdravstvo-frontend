@@ -1,21 +1,23 @@
 /**
  * Created by Bojana on 6/5/2015.
  */
-iktProekt.service('appointmentsService', function ($http) {
+iktProekt.service('appointmentsService', function ($http, $cookies) {
 
 
     var appointment = {};
 
 
-    var doctorTocken = 'petar:9c8d48331b8b1154e34179ab7a159c1d';
+    var doctorTocken = $cookies['usertoken'];
 
     appointment.getAllAppointmentsForDoctor = function(doctorId)
     {
         return $http({
 
             method: "POST",
-            url: ''
-
+            url: '',
+            headers : {
+                'X-Auth-Token' : doctorTocken
+            }
 
 
         });
