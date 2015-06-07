@@ -2,12 +2,12 @@
  * Created by Bojana on 6/5/2015.
  */
 
-iktProekt.service('diagnosisService', function ($http) {
+iktProekt.service('diagnosisService', function ($http, $cookies) {
 
 
     var diagnosis = {};
 
-    var pacientTocken = "viktor:a090ab0d03dabe30f0e6b2508f8843ac";
+    var pacientTocken =  $cookies['usertoken'] ;
 
     diagnosis.addNewDiagnosis = function(diagnosis)
     {
@@ -23,16 +23,21 @@ iktProekt.service('diagnosisService', function ($http) {
         });
     }
 
-    diagnosis.getAllDiagnosisForPacient = function(pacientId)
+    diagnosis.getAllDiagnosisForPacient = function(pacient)
     {
 
+            var params = 'patient_id='+ pacient.id;
             return $http({
 
-                method: "GET",
-                url: 'https://ezdravstvo.herokuapp.com/rest/diagnoses/byPatient',
+                method: "POST",
+                url: 'https://ezdravstvo.herokuapp.com/rest/diagnoses/byPatientId',
                 headers : {
-                    'X-Auth-Token' : pacientTocken
-                }
+                    'X-Auth-Token' : pacientTocken,
+                    'Content-Type' : 'application/x-www-form-urlencoded'
+                },
+                data : params
+
+
 
 
 

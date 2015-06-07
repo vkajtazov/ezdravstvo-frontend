@@ -9,40 +9,22 @@
             <div class="col-sm-10" >
 
                 <div class="panel panel-default">
-                    <div class="panel-heading">
-
+                    <div class="panel-heading col-sm-12">
+                        <div class="col-sm-7 " style="padding-left:0px">
                         Пациенти
                         <span class="label bg-danger  m-t-xs">{{ allPatients.length }}</span>
-                    </div>
-
-                    <div class="row wrapper">
-                        <div class="col-sm-5 m-b-xs">
-                            <select class="input-sm form-control w-sm inline v-middle">
-                                <option value="0">Bulk action</option>
-                                <option value="1">Delete selected</option>
-                                <option value="2">Bulk edit</option>
-                                <option value="3">Export</option>
-                            </select>
-                            <button class="btn btn-sm btn-default">Apply</button>
-                        </div>
-                        <div class="col-sm-4">
-                        </div>
-                        <div class="col-sm-3">
-
-                                <input type="text" class=" form-control"ng-model="patientFilter" placeholder="Пребарај...">
-
-
+                            </div>
+                        <div class="col-sm-5 ">
+                            <input type="text" class="pull-right form-control" ng-model="patientFilter" placeholder="Пребарај..">
                         </div>
                     </div>
+
+
                     <div class="table-responsive">
                         <table class="table table-striped b-t b-light">
                             <thead>
                             <tr>
-                                <th style="width:20px;">
-                                    <label class="i-checks m-b-none">
-                                        <input type="checkbox"><i></i>
-                                    </label>
-                                </th>
+
                                 <th>Име</th>
                                 <th>Презиме</th>
                                 <!--<th>Пол</th>-->
@@ -58,7 +40,7 @@
                             <tbody>
 
                             <tr ng-repeat="patient in allPatients | filter: patientFilter">
-                                <td><label class="i-checks m-b-none"><input type="checkbox" name="post[]"><i></i></label></td>
+
                                 <td>{{patient.firstName }}</td>
                                 <td>{{patient.lastName }}</td>
                                 <!--<td>{{patient.gender}}</td>-->
@@ -67,39 +49,15 @@
                                 <td>{{patient.city}}</td>
                                 <!--<td>{{patient.country}}</td>-->
                                 <td>{{patient.primaryDoctor.firstName + " "+ patient.primaryDoctor.lastName}}</td>
-                                <td><butoon class="btn btn-info" ng-click="editPacient(patient.id)">ИЗМЕНИ</butoon>
-                                    &nbsp; <butoon class="btn btn-danger" ng-click="deletePacient(patient.id)">ИЗБРИШИ</butoon></td>
+                                <td><div class="col-sm-12"><butoon class="btn btn-info" ng-click="editPacient(patient.id)">ИЗМЕНИ</butoon>
+                                    &nbsp; <butoon class="btn btn-danger" ng-click="deletePacient(patient.id)">ИЗБРИШИ</butoon>
+                                </div>
+                                </td>
                             </tr>
                             </tbody>
                         </table>
                     </div>
-                    <footer class="panel-footer">
-                        <div class="row">
-                            <div class="col-sm-4 hidden-xs">
-                                <select class="input-sm form-control w-sm inline v-middle">
-                                    <option value="0">Bulk action</option>
-                                    <option value="1">Delete selected</option>
-                                    <option value="2">Bulk edit</option>
-                                    <option value="3">Export</option>
-                                </select>
-                                <button class="btn btn-sm btn-default">Apply</button>
-                            </div>
-                            <div class="col-sm-4 text-center">
-                                <small class="text-muted inline m-t-sm m-b-sm">showing 20-30 of 50 items</small>
-                            </div>
-                            <div class="col-sm-4 text-right text-center-xs">
-                                <ul class="pagination pagination-sm m-t-none m-b-none">
-                                    <li><a href><i class="fa fa-chevron-left"></i></a></li>
-                                    <li><a href>1</a></li>
-                                    <li><a href>2</a></li>
-                                    <li><a href>3</a></li>
-                                    <li><a href>4</a></li>
-                                    <li><a href>5</a></li>
-                                    <li><a href><i class="fa fa-chevron-right"></i></a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </footer>
+
                 </div>
             </div>
         </div>

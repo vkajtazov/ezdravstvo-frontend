@@ -4,7 +4,7 @@
             <div class="panel panel-info">
                 <div class="panel-heading font-bold">Форма за регистрација</div>
                 <div class="panel-body">
-                    <form novalidate name="addDoctorForm">
+                    <form novalidate name="editDoctor">
                         <div class="form-group">
                             <labell>Име *</labell>
                             <input type="text" ng-model="doctor.firstName" class="form-control"
@@ -21,19 +21,19 @@
                         </div>
 
                         <div class="form-group">
-                            <label>Валиден Е-меил</label>
+                            <label>Е-меил</label>
                             <input required type="email" ng-model="doctor.email" class="form-control" placeholder="Е-меил">
-                        </div>
-                        
-                        <div class="form-group">
-                            <label>Единствен матичен број *</label>
-                            <input type="text" ng-model="doctor.umcn" class="form-control"
-                                required   placeholder="Единствен матичен број">
                         </div>
 
                         <div class="form-group">
-                            <label>Дата на раѓање *</label>
-                            <input required type="date" ng-model="doctor.dateOfBirth" class="form-control"
+                            <label>Единствен матичен број *</label>
+                            <input type="text" ng-model="doctor.umcn" class="form-control"
+                                   required   placeholder="Единствен матичен број">
+                        </div>
+
+                        <div class="form-group">
+                            <label>Дата на раѓање</label>
+                            <input  ng-model="doctor.birthDate" class="form-control"
                                    placeholder="Дата на раѓање">
                         </div>
                         <div class="form-group">
@@ -63,18 +63,17 @@
 
                         <div class="form-group">
                             <label>Име на болница *</label>
-                            <select required ng-model="doctor.hospital.id"
-                                    ng-options="hospital.id as hospital.name for hospital in allHospitals"></select>
+                            <select  ng-model="doctor.hospital.id"
+                                     ng-options="hospital.id as hospital.name for hospital in allHospitals"></select>
                         </div>
                         <div class="form-group">
                             <label>Професија * </label>
-                            <select required  ng-model="doctor.specialization.id"
-                                    ng-options="specialization.id as specialization.name for specialization in allSpecializations"></select>
+                            <select   ng-model="doctor.specialization.id"
+                                      ng-options="specialization.id as specialization.name for specialization in allSpecializations"></select>
                         </div>
 
 
-                        <button type="submit" ng-disabled="!addDoctorForm.$valid" class="btn btn-sm btn-info pull-right"  ng-click="addDoctor()">Потврди</button>
-
+                        <button type="submit" class="btn btn-sm btn-info pull-right" ng-disabled="editDoctor.$invalid" ng-click="updateDoctor()">Зачувај промени</button>
                     </form>
                 </div>
             </div>

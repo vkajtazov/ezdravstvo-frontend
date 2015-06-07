@@ -26,7 +26,17 @@ iktProekt.controller('patientsController', function($scope, loginService, $locat
        //take only date from datetime
         $scope.patient.birthDate = $filter('date')($scope.patient.dateOfBirth , "yyyy-dd-MM").toString().split("T")[0];
         delete $scope.patient['dateOfBirth'];
-        console.log($scope.patient);
+
+
+
+        var doctorId = $scope.doctorId;
+        var doctor = {
+            'id' : doctorId
+        }
+
+
+        $scope.patient.primaryDoctor =doctor;
+
 
         mainService.addPatient($scope.patient).success(function (data) {
             $state.go('admin.patients', {}, {reload: true});
@@ -60,6 +70,7 @@ iktProekt.controller('patientsController', function($scope, loginService, $locat
         mainService.getPacientById(pacientId).success(function(data){
 
             $scope.patient = data;
+            $scope.dateOfBirth = $filter('date')($scope.patient.birthDate , "yyyy-MM-dd HH:mm:ss Z").toString();
             $scope.addPacientState = false;
             $state.go('admin.patients.editPatient');
         });
@@ -69,9 +80,9 @@ iktProekt.controller('patientsController', function($scope, loginService, $locat
 
     $scope.updatePatient = function()
     {
-        $scope.patient.birthDate = $filter('date')($scope.patient.dateOfBirth , "yyyy-dd-MM").toString().split("T")[0];
-        delete $scope.patient['dateOfBirth'];
-        console.log($scope.patient);
+        //$scope.patient.birthDate = $filter('date')($scope.patient.dateOfBirth , "yyyy-dd-MM").toString().split("T")[0];
+        //delete $scope.patient['dateOfBirth'];
+        //console.log($scope.patient);
 
         mainService.addPatient($scope.patient).success(function (data) {
             $state.go('admin.patients', {}, {reload: true});

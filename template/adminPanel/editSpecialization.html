@@ -4,14 +4,14 @@
             <div class="panel panel-info">
                 <div class="panel-heading font-bold">Додади нов лек</div>
                 <div class="panel-body">
-                    <form novalidate name="newSpecializationForm">
+                    <form novalidate name="editSpecializationForm">
                         <div class="form-group">
                             <label>Име: *</label>
                             <input required type="text" ng-model="specialization.name" class="form-control" placeholder="Име"> </input>
                         </div>
 
-                        <button type="submit" class="btn btn-sm btn-info pull-right" ng-disabled="newSpecializationForm.$invalid" ng-click="addSpecialization()">Потврди</button>
-                        <!--<button type="submit" class="btn btn-sm btn-info pull-right" ng-if="!addSpecializationState" ng-click="updateSpecialization()">Зачувај промени</button>-->
+                        <!--<button type="submit" class="btn btn-sm btn-info pull-right" ng-disabled="editSpecializationForm.$invalid" ng-click="addSpecialization()">Потврди</button>-->
+                        <button type="submit" class="btn btn-sm btn-info pull-right" ng-disabled="editSpecializationForm.$invalid" ng-click="updateSpecialization()">Зачувај промени</button>
                     </form>
                 </div>
             </div>
@@ -19,4 +19,3 @@
 
     </div>
 </div>
-

@@ -1,10 +1,10 @@
 /**
  * Created by Bojana on 5/25/2015.
  */
-iktProekt.service('mainService', function($http){
+iktProekt.service('mainService', function($http, $cookies){
 
     var service = {};
-
+    var userToken = $cookies['usertoken'];
 
     service.getAllDoctors = function()
     {
@@ -12,7 +12,10 @@ iktProekt.service('mainService', function($http){
         return $http({
 
             method: "GET",
-            url: 'https://ezdravstvo.herokuapp.com/rest/doctors'
+            url: 'https://ezdravstvo.herokuapp.com/rest/doctors',
+            headers : {'Content-Type': 'application/json; charset=UTF-8',
+                'X-Auth-Token' : userToken
+            }
         });
 
    }
@@ -22,7 +25,10 @@ iktProekt.service('mainService', function($http){
         return $http({
 
             method: "GET",
-            url: 'https://ezdravstvo.herokuapp.com/rest/patients'
+            url: 'https://ezdravstvo.herokuapp.com/rest/patients',
+            headers : {'Content-Type': 'application/json; charset=UTF-8',
+                'X-Auth-Token' : userToken
+            }
         });
 
     }
@@ -32,7 +38,10 @@ iktProekt.service('mainService', function($http){
         return $http({
 
             method: "GET",
-            url: 'https://ezdravstvo.herokuapp.com/rest/hospitals'
+            url: 'https://ezdravstvo.herokuapp.com/rest/hospitals',
+            headers : {'Content-Type': 'application/json; charset=UTF-8',
+                'X-Auth-Token' : userToken
+            }
         });
 
     }
@@ -42,7 +51,10 @@ iktProekt.service('mainService', function($http){
         return $http({
 
             method: "GET",
-            url: 'https://ezdravstvo.herokuapp.com/rest/doctors/'+doctorId
+            url: 'https://ezdravstvo.herokuapp.com/rest/doctors/'+doctorId,
+            headers : {'Content-Type': 'application/json; charset=UTF-8',
+                'X-Auth-Token' : userToken
+            }
         });
     }
     service.getPacientById = function(pacientId)
@@ -50,7 +62,10 @@ iktProekt.service('mainService', function($http){
         return $http({
 
             method: "GET",
-            url: 'https://ezdravstvo.herokuapp.com/rest/patients/'+pacientId
+            url: 'https://ezdravstvo.herokuapp.com/rest/patients/'+pacientId,
+            headers : {'Content-Type': 'application/json; charset=UTF-8',
+                'X-Auth-Token' : userToken
+            }
         });
     }
 
@@ -60,7 +75,10 @@ iktProekt.service('mainService', function($http){
         return $http({
 
             method: "GET",
-            url: 'https://ezdravstvo.herokuapp.com/rest/hospitals/'+hospitalId
+            url: 'https://ezdravstvo.herokuapp.com/rest/hospitals/'+hospitalId,
+            headers : {'Content-Type': 'application/json; charset=UTF-8',
+                'X-Auth-Token' : userToken
+            }
         });
     }
     service.getMedicationById = function(medicationId)
@@ -68,7 +86,10 @@ iktProekt.service('mainService', function($http){
         return $http({
 
             method: "GET",
-            url: 'https://ezdravstvo.herokuapp.com/rest/medications/'+medicationId
+            url: 'https://ezdravstvo.herokuapp.com/rest/medications/'+medicationId,
+            headers : {'Content-Type': 'application/json; charset=UTF-8',
+                'X-Auth-Token' : userToken
+            }
         });
     }
 
@@ -77,7 +98,10 @@ iktProekt.service('mainService', function($http){
         return $http({
 
             method: "GET",
-            url: 'https://ezdravstvo.herokuapp.com/rest/specializations/'+specializationId
+            url: 'https://ezdravstvo.herokuapp.com/rest/specializations/'+specializationId,
+            headers : {'Content-Type': 'application/json; charset=UTF-8',
+                'X-Auth-Token' : userToken
+            }
         });
     }
 
@@ -88,7 +112,10 @@ iktProekt.service('mainService', function($http){
             return $http({
 
                 method: "GET",
-                url: 'https://ezdravstvo.herokuapp.com/rest/hospitals'
+                url: 'https://ezdravstvo.herokuapp.com/rest/hospitals',
+                headers : {'Content-Type': 'application/json; charset=UTF-8',
+                    'X-Auth-Token' : userToken
+                }
             });
 
         }
@@ -100,7 +127,10 @@ iktProekt.service('mainService', function($http){
         return $http({
 
             method: "GET",
-            url: 'https://ezdravstvo.herokuapp.com/rest/specializations'
+            url: 'https://ezdravstvo.herokuapp.com/rest/specializations',
+            headers : {'Content-Type': 'application/json; charset=UTF-8',
+                'X-Auth-Token' : userToken
+            }
         });
 
     }
@@ -109,7 +139,10 @@ iktProekt.service('mainService', function($http){
         return $http({
 
             method: "GET",
-            url: 'https://ezdravstvo.herokuapp.com/rest/medications'
+            url: 'https://ezdravstvo.herokuapp.com/rest/medications',
+            headers : {'Content-Type': 'application/json; charset=UTF-8',
+                'X-Auth-Token' : userToken
+            }
         });
 
     }
@@ -120,7 +153,38 @@ iktProekt.service('mainService', function($http){
         return $http({
             method: "POST",
             url: 'https://ezdravstvo.herokuapp.com/rest/patients',
-            data: patient
+            data: patient,
+            headers : {'Content-Type': 'application/json; charset=UTF-8',
+                'X-Auth-Token' : userToken
+            }
+        });
+
+    }
+
+
+    service.addPrescription = function(prescription)
+    {
+        return $http({
+            method: "POST",
+            url: 'https://ezdravstvo.herokuapp.com/rest/prescriptions',
+            data: prescription,
+            headers : {'Content-Type': 'application/json; charset=UTF-8',
+                'X-Auth-Token' : userToken
+            }
+        });
+    }
+
+    service.changeDoctor = function(data)
+    {
+     Console.log("Doktorche: " );
+        console.log(data);
+        return $http({
+            method: "POST",
+            url: 'https://ezdravstvo.herokuapp.com/rest/requests',
+            data: data,
+            headers : {'Content-Type': 'application/json; charset=UTF-8',
+                'X-Auth-Token' : userToken
+            }
         });
 
     }
@@ -131,17 +195,24 @@ iktProekt.service('mainService', function($http){
         return $http({
             method: "POST",
             url: 'https://ezdravstvo.herokuapp.com/rest/doctors',
-            data: doctor
+            data: doctor,
+            headers : {'Content-Type': 'application/json; charset=UTF-8',
+                'X-Auth-Token' : userToken
+            }
         });
 
     }
     service.updateDoctor = function(doctor)
     {
         console.log(doctor);
+        console.log(userToken);
         return $http({
-            method: "PUT",
+            method: "POST",
             url: 'https://ezdravstvo.herokuapp.com/rest/doctors',
-            data: doctor
+            data: doctor,
+            headers : {'Content-Type': 'application/json; charset=UTF-8',
+                'X-Auth-Token' : userToken
+            }
         });
     }
 
@@ -152,7 +223,10 @@ iktProekt.service('mainService', function($http){
         return $http({
             method: "POST",
             url: 'https://ezdravstvo.herokuapp.com/rest/hospitals',
-            data: hospital
+            data: hospital,
+            headers : {'Content-Type': 'application/json; charset=UTF-8',
+                'X-Auth-Token' : userToken
+            }
         });
     }
     service.addMedication = function(medication)
@@ -161,7 +235,10 @@ iktProekt.service('mainService', function($http){
         return $http({
             method: "POST",
             url: 'https://ezdravstvo.herokuapp.com/rest/medications',
-            data: medication
+            data: medication,
+            headers : {'Content-Type': 'application/json; charset=UTF-8',
+                'X-Auth-Token' : userToken
+            }
         });
     }
 
@@ -172,7 +249,10 @@ iktProekt.service('mainService', function($http){
         return $http({
             method: "POST",
             url: 'https://ezdravstvo.herokuapp.com/rest/specializations',
-            data: specialization
+            data: specialization,
+            headers : {'Content-Type': 'application/json; charset=UTF-8',
+                'X-Auth-Token' : userToken
+            }
         });
     }
 
@@ -181,7 +261,10 @@ iktProekt.service('mainService', function($http){
 
         return $http({
             method: "DELETE",
-            url: 'https://ezdravstvo.herokuapp.com/rest/specializations/'+specializationId
+            url: 'https://ezdravstvo.herokuapp.com/rest/specializations/'+specializationId,
+            headers : {'Content-Type': 'application/json; charset=UTF-8',
+                'X-Auth-Token' : userToken
+            }
 
         });
     }
@@ -191,7 +274,10 @@ iktProekt.service('mainService', function($http){
 
         return $http({
             method: "DELETE",
-            url: 'https://ezdravstvo.herokuapp.com/rest/doctors/'+doctorId
+            url: 'https://ezdravstvo.herokuapp.com/rest/doctors/'+doctorId,
+            headers : {'Content-Type': 'application/json; charset=UTF-8',
+                'X-Auth-Token' : userToken
+            }
 
         });
     }
@@ -201,7 +287,10 @@ iktProekt.service('mainService', function($http){
 
         return $http({
             method: "DELETE",
-            url: 'https://ezdravstvo.herokuapp.com/rest/patients/'+pacientId
+            url: 'https://ezdravstvo.herokuapp.com/rest/patients/'+pacientId,
+            headers : {'Content-Type': 'application/json; charset=UTF-8',
+                'X-Auth-Token' : userToken
+            }
 
         });
     }
@@ -210,7 +299,10 @@ iktProekt.service('mainService', function($http){
     {
         return $http({
             method: "DELETE",
-            url: 'https://ezdravstvo.herokuapp.com/rest/hospitals/'+hospitalId
+            url: 'https://ezdravstvo.herokuapp.com/rest/hospitals/'+hospitalId,
+            headers : {'Content-Type': 'application/json; charset=UTF-8',
+                'X-Auth-Token' : userToken
+            }
 
         });
     }
@@ -219,14 +311,102 @@ iktProekt.service('mainService', function($http){
     {
         return $http({
             method: "DELETE",
-            url: 'https://ezdravstvo.herokuapp.com/rest/medications/'+medicationId
+            url: 'https://ezdravstvo.herokuapp.com/rest/medications/'+medicationId,
+            headers : {'Content-Type': 'application/json; charset=UTF-8',
+                'X-Auth-Token' : userToken
+            }
 
         });
     }
 
+   service.getAllRequests = function()
+   {
+       return $http({
+           method: "GET",
+           url: 'https://ezdravstvo.herokuapp.com/rest/requests',
+           headers : {'Content-Type': 'application/json; charset=UTF-8',
+               'X-Auth-Token' : userToken
+           }
+
+       });
+   }
+
+    service.postRequest = function(data)
+    {
+        return $http({
+            method: "POST",
+            url: 'https://ezdravstvo.herokuapp.com/rest/requests',
+            data: data,
+            headers : {'Content-Type': 'application/json; charset=UTF-8',
+                'X-Auth-Token' : userToken
+            }
+
+        });
+    }
+
+    service.getAllPacientsForDoctor = function (doctorId) {
+        return $http({
+
+            method: "GET",
+            url: 'https://ezdravstvo.herokuapp.com/rest/patients/byDoctor',
+            headers: {
+                'X-Auth-Token': userToken
+            }
+        });
+    }
+
+
+
+    service.getAllAppointmentsForDoctor = function(doctorId)
+    {
+
+        return $http({
+
+            method: "GET",
+            url: 'https://ezdravstvo.herokuapp.com/rest/bookings/byDoctor',
+            headers: {
+                'X-Auth-Token': userToken
+            }
+        });
+    }
+
+    service.getAllPerscriptionsForDiagnose  = function(diagnosisId)
+    {
+        return $http({
+
+            method: "GET",
+            url: 'https://ezdravstvo.herokuapp.com/rest/prescriptions/byDiagnose/'+diagnosisId,
+            headers: {
+                'X-Auth-Token': userToken
+            }
+        });
+    }
+
+    service.getAllPacientRefferals = function(pacient)
+    {
+        return $http({
+
+            method: "GET",
+            url: 'https://ezdravstvo.herokuapp.com/rest/diagnoses/byPatient',
+            headers: {
+                'X-Auth-Token': userToken
+            }
+        });
+    }
+
+    service.getAllPrescriptionsForDiagnosis = function(diagnosis)
+    {
+
+            return $http({
+
+                method: "GET",
+                url: 'https://ezdravstvo.herokuapp.com/rest/prescriptions/byDiagnose/'+diagnosis.id,
+                headers: {
+                    'X-Auth-Token': userToken
+                }
+            });
+    }
+
+
     return service;
-
-
-
-
 });

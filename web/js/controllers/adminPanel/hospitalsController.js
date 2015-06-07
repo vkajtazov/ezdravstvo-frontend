@@ -75,7 +75,7 @@ iktProekt.controller('hospitalsController', function ($scope, loginService, $loc
     $scope.goToAddNewHospitalPage = function()
     {
         $scope.addHospitalState = true;
-        $state.go('admin.hospitals.newHospital');
+        $state.go('admin.hospitals.newHospital', {}, {reload: true});
     }
 
 

@@ -4,7 +4,7 @@
             <div class="panel panel-info">
                 <div class="panel-heading font-bold">Додади нов лек</div>
                 <div class="panel-body">
-                    <form novalidate name="addMedicationForm">
+                    <form novalidate name="editMedicationForm">
                         <div class="form-group">
                             <label>Лек: *</label>
                             <input required type="text" ng-model="medication.name" class="form-control" placeholder="Лек"> </input>
@@ -14,8 +14,7 @@
                             <input required type="text" ng-model="medication.company" class="form-control" placeholder="Производител"> </input>
                         </div>
 
-                        <button type="submit" class="btn btn-sm btn-info pull-right" ng-disabled="addMedicationForm.$invalid" ng-click="addMedication()">Потврди</button>
-                        <!--<button type="submit" class="btn btn-sm btn-info pull-right" ng-if="!addMedicationState" ng-click="updateMedication()">Зачувај промени</button>-->
+                        <button type="submit" class="btn btn-sm btn-info pull-right" ng-disabled="editMedicationForm.$invalid" ng-click="updateMedication()">Зачувај промени</button>
                     </form>
                 </div>
             </div>
@@ -23,4 +22,3 @@
 
     </div>
 </div>
-

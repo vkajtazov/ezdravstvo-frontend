@@ -1,6 +1,8 @@
+<div ng-controller="asideController" xmlns="http://www.w3.org/1999/html">
+    <div class="row pull-right">
 
-    <button class="btn btn-danger pull-right" ng-click="logout()" style="margin:15px;">LOGOUT</button>
 
+    </div>
 <!-- menu -->
 <div class="app-aside hidden-xs bg-dark ">
     <div class="aside-wrap">
@@ -9,25 +11,32 @@
 
             <!-- list -->
             <ul class="nav">
-                <li class="hidden-folded padder m-t m-b-sm text-muted text-xs ">
-                    <span>Админ панела</span>
+                <li class="hidden-folded padder m-t m-b-sm text-muted text-center ">
+                        <img class="img-responsive" src="http://www.iconpot.com/icon/preview/male-user-avatar.jpg.pagespeed.ce.8kzPclUYZY.jpg" style="  width: 100px;
+  height: 100px;
+  margin: auto;
+"/>
+                       <b>   &nbsp;{{user.firstName + " " + user.lastName}}  </b>
+                        <i class="text-xs"> Администратор </i>
+                    <button class="btn btn-danger " ng-click="logout()" style="margin:15px;">LOGOUT</button>
+                    <hr>
                 </li>
                 <li ui-sref="admin.doctors" ui-sref-active="active" class="active">
                     <a href class="auto">
 
-                      <i class="glyphicon glyphicon-stats icon text-primary-dker"></i>
+                      <i class=" glyphicon glyphicon-user icon text-primary-dker"></i>
                       <span class="font-bold" >Доктори</span>
                     </a>
                 </li>
                 <li  ui-sref="admin.patients">
                     <a>
-                        <i class="glyphicon glyphicon-calendar icon text-info-dker"></i>
+                        <i class="glyphicon glyphicon-user icon text-info-dker"></i>
                         <span class="font-bold" >Пациенти</span>
                     </a>
                 </li>
                 <li  ui-sref="admin.hospitals">
                     <a>
-                        <i class="glyphicon glyphicon-calendar icon text-info-dker"></i>
+                        <i class="glyphicon glyphicon-header icon text-info-dker"></i>
                         <span class="font-bold" >Болници</span>
                     </a>
                 </li>
@@ -41,11 +50,17 @@
 
                 <li  ui-sref="admin.specializations">
                     <a>
-                        <i class="glyphicon glyphicon-calendar icon text-info-dker"></i>
+                        <i class="glyphicon glyphicon-calendar  icon text-info-dker "></i>
                         <span class="font-bold" >Специјализации</span>
                     </a>
                 </li>
 
+                <li  ui-sref="admin.changeDoctorRequests">
+                    <a>
+                        <i class="glyphicon glyphicon-list icon text-info-dker"></i>
+                        <span class="font-bold" >Барања за промена на матичен доктор</span>
+                    </a>
+                </li>
 
             </ul>
 

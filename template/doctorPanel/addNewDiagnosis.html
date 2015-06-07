@@ -26,15 +26,17 @@
                         </div>
 
 
-                        <button class="btn btn-info" ng-click="prscription=true">Додади рецепта</button>
+                        <button class="btn btn-info" ng-click="prscription=!prscription">Додади рецепта</button>
 
 
 
                         <div class="form-group" ng-show="prscription==true">
+                            <br>                            <br>
 
                             <label>Додади лек во рецептата:</label>
 
-                            <select ng-model="diagnosis.perscription.medication.id"
+
+                            <select ng-model="data.medId"
                                     ng-options="medication.id as medication.name  for medication in allMedications"></select>
 
 
@@ -42,7 +44,9 @@
 
 
 
-                        <button type="submit" class="btn btn-sm btn-info pull-right"  ng-click="addDiagnosis(diagnosis)">Потврди</button>
+
+
+                        <button type="submit" class="btn btn-sm btn-info pull-right"  ng-click="addDiagnosis(diagnosis, data.medId)">Потврди</button>
 
                     </form>
                 </div>

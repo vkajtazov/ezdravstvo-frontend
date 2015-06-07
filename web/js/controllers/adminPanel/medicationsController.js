@@ -28,8 +28,8 @@ iktProekt.controller('medicationsController', function ($scope, loginService, $l
         }).
             error(function (data, status, headers, config) {
                 if (status == '500') {
-                    alert("Pacientot ne mozhe da se izbrishe");
-                    console.log("Pacientot ne mozhe da se izbrishe")
+                    alert("Lekot ne mozhe da se izbrishe, se koristi vo nekoj od receptite");
+                    console.log("Lekot ne mozhe da se izbrishe, se koristi vo nekoj od receptite");
                 }
                 else {
                     console.log("Unknown error type");
@@ -62,7 +62,7 @@ iktProekt.controller('medicationsController', function ($scope, loginService, $l
     //workaround..
     $scope.goToAddNewMedicationPage = function () {
         $scope.addMedicationState = true;
-        $state.go('admin.medications.newMedication');
+        $state.go('admin.medications.newMedication', {}, {reload: true});
     }
 
 

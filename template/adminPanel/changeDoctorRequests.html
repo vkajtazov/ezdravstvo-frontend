@@ -1,0 +1,58 @@
+<div ng-controller="changeDoctorRequestsController">
+    <div class="wrapper-md">
+        <div class="row" ui-view>
+
+            <div class="col-sm-10">
+                <div class="panel panel-default">
+                    <div class="panel-heading col-sm-12">
+                        <div class="col-sm-7" style="padding-left: 0px">
+                        Одобрување промена на матичен доктор
+                        <span class="label bg-danger  m-t-xs">{{ changeDoctorRequests.length}}</span>
+                            </div>
+                        <div class="col-sm-5">
+                            </div>
+                    </div>
+
+
+                    <div class="table-responsive">
+                        <table class="table table-striped b-t b-light">
+                            <thead>
+                            <tr>
+
+                                <th>Пациент</th>
+                                <th>Доктор</th>
+                                <th>Статус</th>
+                                <th>Акции</th>
+                                <!--<th style="width:30px;"></th>-->
+                            </tr>
+                            </thead>
+                            <tbody>
+
+                            <tr ng-repeat="request in changeDoctorRequests | filter:doctorsFilter">
+
+                                <td>{{request.patient.firstName + " " + request.patient.lastName}}</td>
+                                <td>{{request.doctor.firstName + " " + request.doctor.lastName }}</td>
+                                <td>{{request.status}}</td>
+                                <td>
+                                    <div ng-if="!request.status">
+                                    <butoon class="btn btn-info"  ng-click="approveRequest(request)">ОДОБРИ</butoon>
+                                    &nbsp;
+                                    <butoon class="btn btn-danger" ng-click="rejectRequest(request)">ОДБИ</butoon>
+                                        </div>
+                                    <div ng-if="request.status">
+                                        Нема возможни акции
+                                    </div>
+                                </td>
+
+                            </tr>
+
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>

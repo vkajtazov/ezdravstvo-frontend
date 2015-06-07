@@ -1,0 +1,60 @@
+<div >
+    <div class="wrapper-md">
+        <div class="row" ui-view>
+
+
+            <div class="col-sm-10" >
+
+
+
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+
+                        ДИЈАГНОЗА
+                    </div>
+
+                    <div class=" wrapper">
+                        Дијагноза:
+                        <p> <i> <b>{{ currentDiagnosis.diagnosis}}</b> </i></p>
+
+                        Дијагнозата е внесена на дата   <b> {{ currentDiagnosis.createdAt | date : format : timezone  }}  </b> од доктор  <b> {{currentDiagnosis.doctor.firstName }} {{currentDiagnosis.doctor.lastName }} </b>
+
+
+                    </div>
+                    <div >
+
+                    </div>
+                    <footer class="panel-footer">
+                        <i>Дијагноза за пациент</i>
+                    </footer>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-4" ng-repeat="p in perscriptionsForDiagnose">
+
+                        <div class="panel panel-default text-center">
+                            <div class="panel-heading">РЕЦЕПТ </div>
+                            <div class="panel-body">
+
+                                Лекови кои му се препишани на пациентот <i>{{ p.diagnose.patient.firstName }} {{ p.diagnose.patient.lastName }} </i> на дата {{ p.createdAt}} <br>
+                                <br><br>
+
+                                -  <i class="text-md">{{ p.medication.name }}</i> од производител <i>{{ p.medication.company }}</i>
+
+
+                                <br><br>
+
+                                Дополнително:
+                                <p > {{p.description}}</p>
+                                <br>
+
+                                <span class="text-right">   Доктор :  {{ p.diagnose.doctor.firstName }}  {{ p.diagnose.doctor.lastName }} </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div></div>
+    </div>
+</div>
+</div>

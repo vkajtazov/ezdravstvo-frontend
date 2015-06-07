@@ -4,7 +4,7 @@
             <div class="panel panel-info">
                 <div class="panel-heading font-bold">Форма за внесување нов пациент</div>
                 <div class="panel-body">
-                    <form novalidateb name="newHospitalForm">
+                    <form novalidateb name="editHospitalForm">
                         <div class="form-group">
                             <labell>Име на болница *</labell>
                             <input required type="text" ng-model="hospital.name" class="form-control"
@@ -13,7 +13,7 @@
                         <div class="form-group">
                             <labell>Адреса * </labell>
                             <input required type="text" ng-model="hospital.address" class="form-control"
-                                    placeholder="Адреса на болница">
+                                   placeholder="Адреса на болница">
                         </div>
                         <div class="form-group">
                             <labell>Град на  болница *</labell>
@@ -22,8 +22,8 @@
                         </div>
 
 
-                        <button type="submit" class="btn btn-sm btn-info pull-right" ng-disabled="newHospitalForm.$invalid" ng-click="addHospital(hospital)">Додади</button>
-                        <!--<button type="submit" class="btn btn-sm btn-info pull-right" ng-if="!addHospitalState" ng-click="updateHospital()">Зачувај промени</button>-->
+                        <!--<button type="submit" class="btn btn-sm btn-info pull-right" ng-disabled="newHospitalForm.$invalid" ng-click="addHospital(hospital)">Додади</button>-->
+                        <button type="submit" class="btn btn-sm btn-info pull-right" ng-disabled="editHospitalForm.$invalid" ng-click="updateHospital()">Зачувај промени</button>
                     </form>
                 </div>
             </div>

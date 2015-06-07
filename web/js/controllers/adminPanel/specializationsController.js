@@ -62,7 +62,7 @@ iktProekt.controller('specializationsController', function ($scope, loginService
 //workaround..
     $scope.goToAddNewSpecializationPage = function () {
         $scope.addSpecializationState = true;
-        $state.go('admin.specializations.newSpecialization');
+        $state.go('admin.specializations.newSpecialization', {}, {reload: true});
     }
 
 

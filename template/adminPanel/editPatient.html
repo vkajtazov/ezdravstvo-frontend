@@ -4,7 +4,7 @@
             <div class="panel panel-info">
                 <div class="panel-heading font-bold">Форма за внесување нов пациент</div>
                 <div class="panel-body">
-                    <form novalidate name="newPatientForm">
+                    <form novalidate name="editPatientForm">
                         <div class="form-group">
                             <labell>Име * </labell>
                             <input required type="text" ng-model="patient.firstName" class="form-control"
@@ -30,9 +30,10 @@
                                    placeholder="Единствен матичен број">
                         </div>
                         <div class="form-group">
-                        <label>Дата на раѓање *</label>
-                        <input required type="date" ng-model="patient.dateOfBirth" class="form-control"
-                               placeholder="Дата на раѓање">
+                            <label>Дата на раѓање *</label>
+
+                            <input required ng-model="patient.birthDate" class="form-control"
+                                   placeholder="Дата на раѓање">
                         </div>
 
                         <div class="form-group">
@@ -62,12 +63,12 @@
 
                         <div class="form-group">
                             <label>Доктор *</label>
-                            <select required ng-model="doctorId"
+                            <select required ng-model="patient.primaryDoctor.id"
                                     ng-options="doctor.id as doctor.firstName for doctor in allDoctors" ></select>
                         </div>
 
-                        <button type="submit" class="btn btn-sm btn-info pull-right" ng-disabled="newPatientForm.$invalid" ng-click="addPatient()">Потврди</button>
-                        <!--<button type="submit" class="btn btn-sm btn-info pull-right" ng-if="!addPacientState" ng-click="updatePatient()">Зачувај промени</button>-->
+                        <!--<button type="submit" class="btn btn-sm btn-info pull-right" ng-disabled="newPatientForm.$invalid" ng-click="addPatient()">Потврди</button>-->
+                        <button type="submit" class="btn btn-sm btn-info pull-right" ng-disabled="editPatientForm.$invalid" ng-click="updatePatient()">Зачувај промени</button>
                     </form>
                 </div>
             </div>

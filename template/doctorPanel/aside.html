@@ -1,4 +1,5 @@
-<button class="btn btn-danger pull-right" ng-click="logout()" style="margin:15px;">LOGOUT</button>
+<div>
+
 <!-- menu -->
 
 <div class="app-aside hidden-xs bg-dark " >
@@ -8,8 +9,23 @@
 
             <!-- list -->
             <ul class="nav">
-                <li class="hidden-folded padder m-t m-b-sm text-muted text-xs ">
-                    <span></span>
+                <li class="hidden-folded padder m-t m-b-sm text-muted text-center ">
+
+
+                    <img ng-if="doctor.gender=='M'" class="img-responsive" src="http://www.iconpot.com/icon/preview/male-user-avatar.jpg.pagespeed.ce.8kzPclUYZY.jpg" style="  width: 100px;
+  height: 100px;
+  margin: auto;
+"/>
+                    <img ng-if="doctor.gender=='F'" class="img-responsive" src="http://www.iconpot.com/icon/preview/business-women-avatar.jpg" style="  width: 100px;
+  height: 100px;
+  margin: auto;
+"/>
+
+                    <b>   &nbsp;{{doctor.firstName + " " + doctor.lastName}}  </b> <br>
+                    <i class="text-xs"> {{doctor.specialization.name}}</i> <br>
+                    <i class="text-xs"> Вработен во болница {{ doctor.hospital.name }} </i>
+                    <button class="btn btn-danger " ng-click="logout()" style="margin:15px;">LOGOUT</button>
+                    <hr>
                 </li>
                 <li ui-sref="doctor.info" ui-sref-active="active" class="active">
                     <a href class="auto">
@@ -24,13 +40,13 @@
                         <span class="font-bold" >Прегледи</span>
                     </a>
                 </li>
-                <li  ui-sref="doctor.referrals">
-                    <a>
-                        <i class="glyphicon glyphicon-calendar icon text-info-dker"></i>
-                        <span class="font-bold" >Упати</span>
-                    </a>
-                </li>
-                <li  ui-sref="doctor.patients">
+                <!--<li  ui-sref="doctor.referrals">-->
+                    <!--<a>-->
+                        <!--<i class="glyphicon glyphicon-calendar icon text-info-dker"></i>-->
+                        <!--<span class="font-bold" >Упати</span>-->
+                    <!--</a>-->
+                <!--</li>-->
+                <li  ng-click="goToPatients()">
                     <a>
                         <i class="glyphicon glyphicon-calendar icon text-info-dker"></i>
                         <span class="font-bold" >Пациенти</span>

@@ -15,6 +15,8 @@ iktProekt.controller('doctorsController', function ($scope, loginService, $locat
     //returs all doctors in the system for the datatable
     mainService.getAllDoctors().success(function (data) {
         $scope.allDoctors = data;
+        console.log("DOctors load");
+        console.log(data);
     });
 
 
@@ -30,15 +32,17 @@ iktProekt.controller('doctorsController', function ($scope, loginService, $locat
 
     $scope.addDoctor = function () {
         //take only date from datetime
-        $scope.doctor.birthDate = $filter('date')($scope.doctor.dateOfBirth , "yyyy-dd-MM").toString().split("T")[0];
-        delete $scope.doctor['dateOfBirth'];
-        console.log($scope.doctor);
+
+            $scope.doctor.birthDate = $filter('date')($scope.doctor.dateOfBirth, "yyyy-dd-MM").toString().split("T")[0];
+            delete $scope.doctor['dateOfBirth'];
+
+
 
         mainService.addDoctor($scope.doctor).success(function (data) {
 
 
             $scope.allDoctors.push(data);
-            $state.go('admin.doctors');
+            $state.go('admin.doctors', {}, {reload: true});
 
         }).error(function(response){
             console.log(response);
@@ -54,7 +58,7 @@ iktProekt.controller('doctorsController', function ($scope, loginService, $locat
             error(function(data, status, headers, config) {
               if(status=='500')
               {
-                    alert("Doktorot ne mozhe da se izbrishe");
+                    alert("Doktorot ne mozhe da se izbrishe bidejkji postojat pacienti na koi toj im e matichen doktor");
                     console.log("Doktorot ne mozhe da se izbrishe")
               }
                 else
@@ -81,7 +85,7 @@ iktProekt.controller('doctorsController', function ($scope, loginService, $locat
     $scope.updateDoctor= function()
     {
         mainService.addDoctor($scope.doctor).success(function (data) {
-           $state.go('admin.doctors');
+           $state.go('admin.doctors', {}, {reload: true});
 
         }).error(function(status, headers){
             console.log(status);
@@ -92,6 +96,7 @@ iktProekt.controller('doctorsController', function ($scope, loginService, $locat
     //workaround...
     $scope.goToAddNewDoctorPage = function()
     {
+
         $scope.addDoctorState = true;
         $state.go('admin.doctors.newDoctor');
     }

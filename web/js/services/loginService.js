@@ -18,7 +18,6 @@ iktProekt.service('loginService', function ($http) {
             url: 'https://ezdravstvo.herokuapp.com/rest/user/authenticate',
             headers: {
                 'Content-Type': "application/x-www-form-urlencoded"
-
             },
             data: params
 

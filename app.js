@@ -6,7 +6,8 @@
 var iktProekt = angular.module('iktProekt', [
     'ui.bootstrap',
     'ui.router',
-    'ngCookies'
+    'ngCookies',
+    'ngResource'
 
 
 ]).constant('enums',
@@ -23,9 +24,7 @@ iktProekt.run(function ($rootScope, $location, authenticationService, roleServic
     var routesForAdmin = ['/admin'];
     var routesForDoctor = ['/doctor'];
     var routesForPatient = ['/patient'];
-    //
-    //console.log("ROUTE CONFIG");
-    //
+
     // check if current location matches route
     var routeClean = function (route) {
         return _.find(routesThatDontRequireAuth,
@@ -34,13 +33,6 @@ iktProekt.run(function ($rootScope, $location, authenticationService, roleServic
             });
     };
 
-    // check if current location matches route
-    var routeAdmin = function (route) {
-        return _.find(routesForAdmin,
-            function (noAuthRoute) {
-                return route.indexOf(noAuthRoute) > -1;
-            });
-    };
     // check if current location matches route
     var routeDoctor = function (route) {
         return _.find(routesForDoctor,
@@ -57,6 +49,13 @@ iktProekt.run(function ($rootScope, $location, authenticationService, roleServic
             });
     };
 
+    // check if current location matches route
+    var routeAdmin = function (route) {
+        return _.find(routesForAdmin,
+            function (noAuthRoute) {
+                return route.indexOf(noAuthRoute) > -1;
+            });
+    };
     console.log("routePatient", routePatient);
 
     $rootScope.$on('$stateChangeStart', function (ev, to, toParams, from, fromParams) {
@@ -64,33 +63,29 @@ iktProekt.run(function ($rootScope, $location, authenticationService, roleServic
 
         // if route requires auth and user is not logged in
         if (!routeClean($location.url()) && !authenticationService.isLoggedIn()) {
-            // redirect back to login
 
+            // redirect back to login
             ev.preventDefault();
             $location.path('/login');
         }
         else if (routeAdmin($location.url()) && !roleService.validateRoleAdmin(authenticationService.getCurrentUser())) {
-
+            console.log("NOT ADMIN" + authenticationService.getCurrentUser());
             // redirect back to login
             ev.preventDefault();
-            $location.path('/error');
+            $location.path('/error').replace();
         }
 
         else if (routeDoctor($location.url()) && !roleService.validateRoleDoctor(authenticationService.getCurrentUser())) {
-
+            console.log("NOT DOCTOR" + authenticationService.getCurrentUser());
             // redirect back to login
             ev.preventDefault();
-            $location.path('/error');
+            $location.path('/error').replace();
         }
-        var r = authenticationService.getCurrentUser();
-
-
-
-         if (routePatient($location.url()) && !roleService.validateRolePatient(authenticationService.getCurrentUser())) {
-
+         else if (routePatient($location.url()) && !roleService.validateRolePatient(authenticationService.getCurrentUser())) {
+            console.log("NOT PATIENT" + authenticationService.getCurrentUser());
             // redirect back to login
             ev.preventDefault();
-            $location.path('/error');
+            $location.path('/error').replace();
         }
 
     });
@@ -124,7 +119,7 @@ iktProekt.config(
                 templateUrl : 'template/adminPanel/home.html'
             })
             $stateProvider.state('admin.doctors',{
-                url: '/doctors',
+                url: '/list-doctors',
                 templateUrl : 'template/adminPanel/doctors.html'
             })
             $stateProvider.state('admin.doctors.newDoctor',{
@@ -133,11 +128,11 @@ iktProekt.config(
             })
             $stateProvider.state('admin.doctors.editDoctor',{
                 url: '/edit-doctor',
-                templateUrl : 'template/adminPanel/addNewDoctor.html'
+                templateUrl : 'template/adminPanel/editDoctor.html'
             })
 
             $stateProvider.state('admin.patients',{
-                url: '/patients',
+                url: '/list-patients',
                 templateUrl : 'template/adminPanel/patients.html'
             })
             $stateProvider.state('admin.patients.newPatient',{
@@ -146,7 +141,7 @@ iktProekt.config(
             })
             $stateProvider.state('admin.patients.editPatient',{
                 url: '/edit-patient',
-                templateUrl : 'template/adminPanel/addNewPatient.html'
+                templateUrl : 'template/adminPanel/editPatient.html'
             })
             $stateProvider.state('admin.hospitals', {
                 url: '/hospitals',
@@ -160,7 +155,7 @@ iktProekt.config(
             })
             $stateProvider.state('admin.hospitals.editHospital', {
                 url: '/edit-hospital',
-                templateUrl : 'template/adminPanel/addNewHospital.html'
+                templateUrl : 'template/adminPanel/editHospital.html'
 
             })
 
@@ -176,7 +171,7 @@ iktProekt.config(
 
             $stateProvider.state('admin.medications.editMedication', {
                 url: '/edit-medication',
-                templateUrl : 'template/adminPanel/addNewMedication.html'
+                templateUrl : 'template/adminPanel/editMedication.html'
 
             })
 
@@ -192,7 +187,13 @@ iktProekt.config(
 
             $stateProvider.state('admin.specializations.editSpecialization', {
                 url: '/edit-specialization',
-                templateUrl : 'template/adminPanel/addNewSpecialization.html'
+                templateUrl : 'template/adminPanel/editSpecialization.html'
+
+            })
+
+            $stateProvider.state('admin.changeDoctorRequests', {
+                url: '/requests',
+                templateUrl : 'template/adminPanel/changeDoctorRequests.html'
 
             })
 
@@ -210,10 +211,34 @@ iktProekt.config(
             })
 
             $stateProvider.state('patient.doctor', {
-                url: '/doctor',
+                url: '/primary-doctor',
                 templateUrl : 'template/patientPanel/doctor.html'
 
             })
+
+
+            $stateProvider.state('patient.referrals', {
+                url: '/diagnosis',
+                templateUrl : 'template/patientPanel/referrals.html'
+
+            })
+            $stateProvider.state('patient.referrals.preview', {
+                url: '/preview',
+                templateUrl : 'template/patientPanel/previewOfDiagnosis.html'
+
+            })
+
+
+            $stateProvider.state('patient.appointments.newAppointment', {
+                url: '/add-appointment',
+                templateUrl : 'template/patientPanel/addNewAppointment.html'
+            })
+
+            $stateProvider.state('patient.changeDoctor', {
+                url: '/change-doctor',
+                templateUrl : 'template/patientPanel/changeDoctor.html'
+            })
+
 
 
             //doctors
@@ -228,7 +253,7 @@ iktProekt.config(
 
             })
             $stateProvider.state('doctor.patients', {
-                url: '/patients',
+                url: '/list-patients',
                 templateUrl : 'template/doctorPanel/patients.html'
 
             })
@@ -275,22 +300,6 @@ iktProekt.config(
             })
 
 
-            $stateProvider.state('patient.referrals', {
-                url: '/referrals',
-                templateUrl : 'template/patientPanel/referrals.html'
-
-            })
-
-
-            $stateProvider.state('patient.appointments.newAppointment', {
-                url: '/add-appointment',
-                templateUrl : 'template/patientPanel/addNewAppointment.html'
-            })
-
-            $stateProvider.state('patient.doctor.changeDoctor', {
-                url: '/change-doctor',
-                templateUrl : 'template/patientPanel/changeDoctor.html'
-            })
         }]
 
 );
