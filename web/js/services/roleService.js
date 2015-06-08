@@ -20,16 +20,16 @@ iktProekt.service('roleService', function ($http, enums) {
         },
 
         validateRoleAdmin: function (currentUser) {
-            return currentUser ? _.contains(adminRole, currentUser.role) : false;
+            return currentUser.hasOwnProperty('role')  ? _.contains(adminRole, currentUser.role) : false;
         },
 
         validateRoleDoctor: function (currentUser) {
-            return currentUser ? _.contains(doctorRole, currentUser.role) : false;
+            return currentUser.hasOwnProperty('role')  ? _.contains(doctorRole, currentUser.role) : false;
         },
 
         validateRolePatient: function (currentUser) {
             console.log("sdfsdf : " + currentUser.role);
-            return currentUser ? _.contains(patientRole, currentUser.role) : false;
+            return currentUser.hasOwnProperty('role')  ? _.contains(patientRole, currentUser.role) : false;
         }
     };
 });

@@ -2,7 +2,7 @@
  * Created by Bojana on 6/3/2015.
  */
 
-iktProekt.controller('doctorPanelController', function ($scope,passdataService,$filter,appointmentsService,mainService,authenticationService, $cookies, loginService, $location, $filter, $state,  diagnosisService) {
+iktProekt.controller('doctorPanelController', function ($scope,passdataService,roleService,$filter,appointmentsService,mainService,authenticationService, $cookies, loginService, $location, $filter, $state,  diagnosisService) {
 
 
     $scope.doctor  = authenticationService.getCurrentUser(); //get doctor by id from database
@@ -137,21 +137,20 @@ iktProekt.controller('doctorPanelController', function ($scope,passdataService,$
 
         });
 
-
-
-
-
-
-
     }
+
     $scope.updateDoctor = function(doctor)
     {
         console.log(doctor);
         mainService.updateDoctor(doctor).success(function(data){
 
-            console.log(data);
+            console.log("UPDATE doctor SUCCESS");
+            console.log(JSON.stringify(data));
+            data.role = roleService.getRoleforName(data.role);
             $cookies['currentUser']= JSON.stringify(data);
             $scope.doctor = data;
+            window.scrollTo(0, 0);
+            $state.reload();
         });
     }
 
