@@ -11,9 +11,9 @@ iktProekt.controller('changeDoctorRequestsController', function ($scope, mainSer
            if( request.status == "APPROVED")
            request.status = 'Одобрено';
            else if( request.status == "REJECTED")
-               request.status = 'Одбиено';
+               request.status  = 'Одбиено';
            else if(request.status == "PENDING")
-               request.status = 'Неодредено';
+               request.status  = 'Неодредено';
            });
 
         $scope.changeDoctorRequests = data;
@@ -21,7 +21,7 @@ iktProekt.controller('changeDoctorRequestsController', function ($scope, mainSer
 
     $scope.approveRequest = function(request){
         var req =  angular.copy(request);
-        req.status = 2;
+        req.status = 1;
         mainService.postRequest(req).success(function(){
             $state.reload();
         });

@@ -22,25 +22,29 @@
                                 <th>Пациент</th>
                                 <th>Доктор</th>
                                 <th>Статус</th>
+                                <th>Датум </th>
                                 <th>Акции</th>
                                 <!--<th style="width:30px;"></th>-->
                             </tr>
                             </thead>
                             <tbody>
 
-                            <tr ng-repeat="request in changeDoctorRequests | filter:doctorsFilter">
+                            <tr ng-repeat="request in changeDoctorRequests | filter:doctorsFilter | orderBy: '-requestCreated'">
 
                                 <td>{{request.patient.firstName + " " + request.patient.lastName}}</td>
                                 <td>{{request.doctor.firstName + " " + request.doctor.lastName }}</td>
-                                <td>{{request.status}}</td>
+
+                                <td ng-class="{'Неодредено': 'text-dker', 'Одбиено': 'text-danger-dker', 'Одобрено': 'text-info-dker' }[request.status]">{{request.status}}</td>
+                                <td>{{request.requestCreated |  date : format : timezone  }}</td>
                                 <td>
-                                    <div ng-if="!request.status">
+                                    <div ng-show="(request.status == 'Неодредено')" >
                                     <butoon class="btn btn-info"  ng-click="approveRequest(request)">ОДОБРИ</butoon>
                                     &nbsp;
                                     <butoon class="btn btn-danger" ng-click="rejectRequest(request)">ОДБИ</butoon>
                                         </div>
-                                    <div ng-if="request.status">
-                                        Нема возможни акции
+                                    <div ng-show="!(request.status == 'Неодредено')">
+                                        <i class="glyphicon   glyphicon-eye-open icon text-primary-dker"></i>
+                                        &nbsp; Нема возможни акции
                                     </div>
                                 </td>
 

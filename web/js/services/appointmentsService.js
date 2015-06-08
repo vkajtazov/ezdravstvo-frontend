@@ -1,52 +1,73 @@
 /**
  * Created by Bojana on 6/5/2015.
  */
-iktProekt.factory('appointmentsService', function($resource, $cookies) {
+iktProekt.factory('appointmentsService', function ($resource, $cookies) {
 
 
     var userToken = $cookies['usertoken'];
 
     return $resource('https://ezdravstvo.herokuapp.com/rest/bookings/:action', {}, {
-        find : {
-            method : 'POST',
-            isArray : true,
-            params : {
-                'action' : 'find'
-            },
-            headers : {
-                'Content-Type' : 'application/x-www-form-urlencoded',
-                'X-Auth-Token': userToken
-
-            }
-        },
-        book : {
-            method : 'POST',
-            params : {
-                'action' : 'book'
-            },
-            headers : {
-                'Content-Type' : 'application/x-www-form-urlencoded',
-                'X-Auth-Token': userToken
-            }
-        },
-
-        getByPatient : {
-            method : 'GET',
+        find: {
+            method: 'POST',
             isArray: true,
-            params : {
-                'action' : 'byPatient'
+            params: {
+                'action': 'find'
             },
-            headers : {
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+                'X-Auth-Token': userToken
+
+            }
+        },
+        book: {
+            method: 'POST',
+            params: {
+                'action': 'book'
+            },
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
                 'X-Auth-Token': userToken
             }
         },
-        cancel : {
-            method : 'POST',
-            params : {
-                'action' : 'cancel'
+
+        getByPatient: {
+            method: 'GET',
+            isArray: true,
+            params: {
+                'action': 'byPatient'
             },
-            headers : {
-                'Content-Type' : 'application/x-www-form-urlencoded',
+            headers: {
+                'X-Auth-Token': userToken
+            }
+        },
+        cancel: {
+            method: 'POST',
+            params: {
+                'action': 'cancel'
+            },
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+                'X-Auth-Token': userToken
+            }
+        },
+        getByReferrer: {
+            method: 'GET',
+            isArray: true,
+            params: {
+                'action': 'byReferrer'
+            },
+            headers: {
+                'X-Auth-Token': userToken
+            }
+        },
+
+        bookFromDoctor: {
+            method: 'POST',
+            params: {
+                'action': 'bookFromDoctor'
+            },
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
                 'X-Auth-Token': userToken
             }
         }

@@ -7,13 +7,13 @@ iktProekt.controller('appointmentsController', function ($scope, $rootScope, aut
     $scope.newTimeslot = {};
     $scope.bookAppointmentState = false;
 
-    $scope.currentDate = new Date();
+    $scope.selectedDate = new Date();
 
     $scope.searchTimeslots = function() {
-        $scope.currentDate = new Date($scope.newTimeslot.date);
-        console.log("currentDate: " +$scope.currentDate );
+        $scope.selectedDate = new Date($scope.newTimeslot.date);
+        console.log("selectedDate: " +$scope.selectedDate );
         appointmentsService.find($.param({
-            byDate: $scope.currentDate
+            byDate: $scope.selectedDate
         }), function success(result) {
             $scope.allTimeslots = result;
             $scope.bookAppointmentState = true;
@@ -31,10 +31,10 @@ iktProekt.controller('appointmentsController', function ($scope, $rootScope, aut
     });
 
     $scope.bookAppointment = function () {
-        console.log("currentDate: on Book:  " +$scope.currentDate );
+        console.log("selectedDate: on Book:  " +$scope.selectedDate );
 
         appointmentsService.book($.param({
-            date: $scope.currentDate,
+            date: $scope.selectedDate,
             time_id: $scope.newTimeslot.id
         }), function success(result) {
             console.log("SUCCESSFULLY booked appointment");

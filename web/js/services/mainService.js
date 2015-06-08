@@ -176,7 +176,7 @@ iktProekt.service('mainService', function($http, $cookies){
 
     service.changeDoctor = function(data)
     {
-     Console.log("Doktorche: " );
+     console.log("Change Doctor request POST " );
         console.log(data);
         return $http({
             method: "POST",
@@ -333,6 +333,8 @@ iktProekt.service('mainService', function($http, $cookies){
 
     service.postRequest = function(data)
     {
+        console.log('POST take request for doctor change');
+        console.log(data);
         return $http({
             method: "POST",
             url: 'https://ezdravstvo.herokuapp.com/rest/requests',

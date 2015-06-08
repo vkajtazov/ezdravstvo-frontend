@@ -33,7 +33,7 @@
                             </thead>
                             <tbody>
 
-                            <tr ng-repeat="appointment in allAppointments | filter:appointmentsFilter">
+                            <tr ng-repeat="appointment in allAppointments | filter:appointmentsFilter | orderBy: 'date'">
                                 <td>{{appointment.date  |  date : format : timezone  }}</td>
                                 <td>{{appointment.timeSlot.startTime }}</td>
                                 <td>{{appointment.timeSlot.endTime }}</td>

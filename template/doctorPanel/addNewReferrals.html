@@ -1,0 +1,72 @@
+<div ng-controller="doctorReferralsController">
+    <div class="row">
+        <div class="col-sm-10" style="margin: auto">
+            <div class="panel panel-info">
+                <div class="panel-heading font-bold">Нов упат</div>
+                <div class="panel-body">
+                    <form novalidate>
+
+                        <div class="table-responsive">
+
+
+                            <div class="form-group col-sm-6 form-inline pull-left">
+
+                                <label>Доктор</label>
+                                <select ng-model="referralDoctor.id"
+                                        ng-options="doctor.id as doctor.firstName + ' ' + doctor.lastName +' - '+ doctor.hospital.name for doctor in allDoctors"></select>
+                            </div>
+
+                            <div class="form-group col-sm-6 form-inline pull-right">
+                                <label>Одбери датум за слободни термини: </label>
+                                <input required type="date" ng-model="newTimeslot.date" class="form-control"  placeholder="Датум за преглед">
+                                <button type="submit" class="btn btn-success  c btn-info pull-right form-control" ng-click="searchTimeslots()">Побарај </button>
+                            </div>
+                            <div ng-if="allTimeslots!={}">
+
+                                <div class="form-group col-sm-6 form-inline pull-left" ng-show="bookReferralState">
+
+                                    <label>Пациент</label>
+                                    <input ng-show="selectedReferralState" ng-model="diagnosis.patient"
+                                           value="{{selectedReferral.patient.firstName+ ' ' + selectedReferral.patient.lastName}}}" readonly>
+
+                                    <select ng-model="diagnosis.patient.id" ng-show="!selectedReferralState"
+                                            ng-options="patient.id as patient.firstName + ' ' + patient.lastName for patient in allPatients"></select>
+                                </div>
+
+                                <table class="table table-striped b-t b-light">
+                                    <thead>
+                                    <tr ng-show="bookReferralState">
+                                        <th>Термини: </th>
+                                        <th>Од</th>
+                                        <th>До</th>
+
+                                        <!--<th style="width:30px;"></th>-->
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+
+                                    <tr ng-repeat="timeslot in allTimeslots">
+                                        <td><label class="i-checks m-b-none"><input type="radio"
+                                                                                    name="post[]" ng-model="newTimeslot.id" ng-value="timeslot.id"><i></i></label></td>
+
+                                        <td>{{timeslot.startTime }}</td>
+                                        <td>{{timeslot.endTime }}</td>
+                                    </tr>
+                                    </tbody>
+
+                                </table>
+                                <div class="col-sm-4 pull-right">
+                                    <buton ng-show="bookReferralState" class="btn btn-info pull-right btn-lg" ng-click="bookReferral()">ЗАКАЖИ</buton>
+                                </div>
+                            </div>
+                        </div>
+                        <td>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+

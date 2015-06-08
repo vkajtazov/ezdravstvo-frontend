@@ -2,7 +2,7 @@
  * Created by Bojana on 6/3/2015.
  */
 
-iktProekt.controller('doctorPanelController', function ($scope,$filter,mainService,authenticationService, $cookies, loginService, $location, $filter, $state,  diagnosisService) {
+iktProekt.controller('doctorPanelController', function ($scope,passdataService,$filter,appointmentsService,mainService,authenticationService, $cookies, loginService, $location, $filter, $state,  diagnosisService) {
 
 
     $scope.doctor  = authenticationService.getCurrentUser(); //get doctor by id from database
@@ -13,8 +13,11 @@ iktProekt.controller('doctorPanelController', function ($scope,$filter,mainServi
     $scope.allMedications = [];
 
     $scope.allDiagnosisForPatitent = [];
+    $scope.selectedAppointment =  passdataService.getSelectedAppointment();
+    $scope.selectedAppointmentState = passdataService.getSelectedAppointmentState();
 
-
+    console.log("appointment state  " +  $scope.selectedAppointmentState);
+    console.log($scope.selectedAppointment);
     mainService.getAllAppointmentsForDoctor($scope.doctor.id).success(function (data) {
 
         $scope.allAppointmentsForDoctor  = data;
@@ -40,11 +43,23 @@ iktProekt.controller('doctorPanelController', function ($scope,$filter,mainServi
         console.log($scope.allPacientsForDoctor);
     });
 
-    $scope.enterDiagnosis =function()
+    $scope.enterDiagnosis = function(appointment)
     {
-            $state.go('doctors.patients.newDiagnosis');
+        passdataService.setSelectedAppointmentState(true);
+        passdataService.setSelectedAppointment(appointment);
+        $state.go('doctor.appointments.newDiagnosis');
+
     }
 
+    $scope.cancelAppointment = function (appointmentId) {
+        appointmentsService.cancel($.param({
+            id: appointmentId
+        }), function success(result) {
+            console.log("SUCCESSFULLY canceled appointment");
+            $state.go('doctor.patients', {}, {reload: true});
+        });
+
+    }
 
     //nosi na tabela so site dijagnozi na pacientot
     $scope.viewPatientDiagnosis = function(patient)
@@ -71,6 +86,7 @@ iktProekt.controller('doctorPanelController', function ($scope,$filter,mainServi
     $scope.goToAddNewAppointmentPage = function()
     {
         $state.go('doctors.appointments.newAppointment');
+
     }
 
     $scope.goToAddNewDiagnosisPage = function(){
@@ -84,6 +100,9 @@ iktProekt.controller('doctorPanelController', function ($scope,$filter,mainServi
         delete  diagnosis['data'];
 
 
+        if($scope.selectedAppointmentState){
+            diagnosis.patient = $scope.selectedAppointment.patient;
+        }
         // treba do sesija id-to
         diagnosis.doctor = {};
 
@@ -112,7 +131,7 @@ iktProekt.controller('doctorPanelController', function ($scope,$filter,mainServi
 
 
             console.log("Recept", data);
-
+            $state.go('doctor.patients')
 
             });
 

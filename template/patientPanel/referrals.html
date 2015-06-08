@@ -31,10 +31,10 @@
                             </thead>
                             <tbody>
 
-                            <tr ng-repeat="referral in allReferrals | filter : refferalsFilter">
+                            <tr ng-repeat="referral in allReferrals | filter : refferalsFilter  | orderBy: 'createdAt' ">
 
                                 <td>{{referral.createdAt | date : format : timezone }} </td>
-                                <td>{{referral.patient.primaryDoctor.firstName }} {{referral.patient.primaryDoctor.lastName }}</td>
+                                <td>{{referral.doctor.firstName }} {{referral.doctor.lastName }}</td>
                                 <td>{{referral.diagnosis }} </td>
                                 <td><button class="btn btn-info" ng-click="showDiagnosisDetails(referral)">ПРИКАЖИ ДЕТАЛИ</button> </td>
                             </tr>
