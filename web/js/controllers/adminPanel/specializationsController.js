@@ -22,20 +22,22 @@ iktProekt.controller('specializationsController', function ($scope, loginService
     }
 
     $scope.deleteSpecialization = function (specializationId) {
+        var delete_spec = window.confirm("Дали сте сигурни дека сакате да ја избришете специјализацијата?");
+        if (delete_spec) {
+            mainService.deleteSpecialization(specializationId).success(function (data) {
+                $state.reload();
+            }).
+                error(function (data, status, headers, config) {
+                    if (status == '500') {
+                        alert("Specijalizacijata ne mozhe da se izbrishe");
+                        console.log("Specijalizacijata ne mozhe da se izbrishe " + data);
+                    }
+                    else {
+                        console.log("Unknown error type");
+                    }
 
-        mainService.deleteSpecialization(specializationId).success(function (data) {
-            $state.reload();
-        }).
-            error(function (data, status, headers, config) {
-                if (status == '500') {
-                    alert("Specijalizacijata ne mozhe da se izbrishe");
-                    console.log("Specijalizacijata ne mozhe da se izbrishe " + data);
-                }
-                else {
-                    console.log("Unknown error type");
-                }
-
-            });
+                });
+        }
     }
 
     $scope.editSpecialization = function (specializationId) {
@@ -52,12 +54,12 @@ iktProekt.controller('specializationsController', function ($scope, loginService
 
     $scope.updateSpecialization = function () {
         mainService.addSpecialization($scope.specialization).success(function (data) {
+            alert("Успешно ги променивте податоците за специјализацијата!");
             $state.go('admin.specializations', {}, {reload: true});
         }).error(function (response) {
             console.log(response);
         });
     }
-
 
 //workaround..
     $scope.goToAddNewSpecializationPage = function () {

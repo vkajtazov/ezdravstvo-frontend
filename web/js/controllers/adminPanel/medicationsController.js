@@ -22,22 +22,23 @@ iktProekt.controller('medicationsController', function ($scope, loginService, $l
     }
 
     $scope.deleteMedication = function (medicationId) {
+        var cancel = window.confirm("Дали сте сигурни дека сакате да го избришете лекот?");
+        if (cancel) {
+            mainService.deleteMedication(medicationId).success(function (data) {
+                $state.reload();
+            }).
+                error(function (data, status, headers, config) {
+                    if (status == '500') {
+                        alert("Lekot ne mozhe da se izbrishe, se koristi vo nekoj od receptite");
+                        console.log("Lekot ne mozhe da se izbrishe, se koristi vo nekoj od receptite");
+                    }
+                    else {
+                        console.log("Unknown error type");
+                    }
 
-        mainService.deleteMedication(medicationId).success(function (data) {
-            $state.reload();
-        }).
-            error(function (data, status, headers, config) {
-                if (status == '500') {
-                    alert("Lekot ne mozhe da se izbrishe, se koristi vo nekoj od receptite");
-                    console.log("Lekot ne mozhe da se izbrishe, se koristi vo nekoj od receptite");
-                }
-                else {
-                    console.log("Unknown error type");
-                }
-
-            });
+                });
+        }
     }
-
     $scope.editMedication = function (medicationId) {
 
         mainService.getMedicationById(medicationId).success(function (data) {
@@ -52,6 +53,7 @@ iktProekt.controller('medicationsController', function ($scope, loginService, $l
 
     $scope.updateMedication = function () {
         mainService.addMedication($scope.medication).success(function (data) {
+            alert("Успешно ги променивте информациите за лекот!");
             $state.go('admin.medications', {}, {reload: true});
         }).error(function (response) {
             console.log(response);

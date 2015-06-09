@@ -32,7 +32,7 @@
                             </thead>
                             <tbody>
 
-                            <tr ng-repeat="diagnosis in allDiagnosisOfPacient">
+                            <tr ng-repeat="diagnosis in allDiagnosisOfPacient  | orderBy: '-createdAt'">
 
                                 <td>{{diagnosis.createdAt |  date : format : timezone  }}</td>
                                 <td>{{diagnosis.diagnosis }}</td>

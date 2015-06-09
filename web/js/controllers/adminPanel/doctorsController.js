@@ -15,8 +15,6 @@ iktProekt.controller('doctorsController', function ($scope, loginService, $locat
     //returs all doctors in the system for the datatable
     mainService.getAllDoctors().success(function (data) {
         $scope.allDoctors = data;
-        console.log("DOctors load");
-        console.log(data);
     });
 
 
@@ -32,14 +30,9 @@ iktProekt.controller('doctorsController', function ($scope, loginService, $locat
 
     $scope.addDoctor = function () {
         //take only date from datetime
-
             $scope.doctor.birthDate = $filter('date')($scope.doctor.dateOfBirth, "yyyy-dd-MM").toString().split("T")[0];
             delete $scope.doctor['dateOfBirth'];
-
-
-
         mainService.addDoctor($scope.doctor).success(function (data) {
-
 
             $scope.allDoctors.push(data);
             $state.go('admin.doctors', {}, {reload: true});
@@ -50,28 +43,25 @@ iktProekt.controller('doctorsController', function ($scope, loginService, $locat
     }
 
 
-    $scope.deleteDoctor = function(doctorId)
-    {
-        mainService.deleteDoctor(doctorId).success(function(data){
-            $state.reload();
-        }).
-            error(function(data, status, headers, config) {
-              if(status=='500')
-              {
-                    alert("Doktorot ne mozhe da se izbrishe bidejkji postojat pacienti na koi toj im e matichen doktor");
-                    console.log("Doktorot ne mozhe da se izbrishe")
-              }
-                else
-              {
-                  console.log("Unknown error type");
-              }
+    $scope.deleteDoctor = function(doctorId) {
+        var cancel = window.confirm("Дали сте сигурни дека сакате да ги избришете информациите за докторот?");
+        if (cancel) {
+            mainService.deleteDoctor(doctorId).success(function (data) {
+                $state.reload();
+            }).
+                error(function (data, status, headers, config) {
+                    if (status == '500') {
+                        alert("Doktorot ne mozhe da se izbrishe bidejkji postojat pacienti na koi toj im e matichen doktor");
+                        console.log("Doktorot ne mozhe da se izbrishe")
+                    }
+                    else {
+                        console.log("Unknown error type");
+                    }
 
-            });
+                });
+        }
     }
-
     $scope.editDoctor = function (doctorId) {
-
-        console.log("Doktor ID", doctorId);
         mainService.getDoctorById(doctorId).success(function(data){
 
             $scope.doctor = data;
@@ -85,6 +75,7 @@ iktProekt.controller('doctorsController', function ($scope, loginService, $locat
     $scope.updateDoctor= function()
     {
         mainService.addDoctor($scope.doctor).success(function (data) {
+            alert("Успешно додадовте нов доктор!");
            $state.go('admin.doctors', {}, {reload: true});
 
         }).error(function(status, headers){

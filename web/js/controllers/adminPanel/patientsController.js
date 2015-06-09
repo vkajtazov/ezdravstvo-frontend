@@ -45,26 +45,24 @@ iktProekt.controller('patientsController', function($scope, loginService, $locat
         });
     }
 
-    $scope.deletePacient= function(pacientId)
-    {
+    $scope.deletePacient= function(pacientId) {
+        var cancel = window.confirm("Дали сте сигурни дека сакате да го избришете пациентот?");
+        if (cancel) {
+            mainService.deletePacient(pacientId).success(function (data) {
+                $state.reload();
+            }).
+                error(function (data, status, headers, config) {
+                    if (status == '500') {
+                        alert("Pacientot ne mozhe da se izbrishe");
+                        console.log("Pacientot ne mozhe da se izbrishe")
+                    }
+                    else {
+                        console.log("Unknown error type");
+                    }
 
-        mainService.deletePacient(pacientId).success(function(data){
-            $state.reload();
-        }).
-            error(function(data, status, headers, config) {
-                if(status=='500')
-                {
-                    alert("Pacientot ne mozhe da se izbrishe");
-                    console.log("Pacientot ne mozhe da se izbrishe")
-                }
-                else
-                {
-                    console.log("Unknown error type");
-                }
-
-            });
+                });
+        }
     }
-
     $scope.editPacient = function (pacientId) {
 
         mainService.getPacientById(pacientId).success(function(data){
@@ -85,6 +83,7 @@ iktProekt.controller('patientsController', function($scope, loginService, $locat
         //console.log($scope.patient);
 
         mainService.addPatient($scope.patient).success(function (data) {
+            alert("Успешно ги променивте податоците за пациентот!");
             $state.go('admin.patients', {}, {reload: true});
         }).error(function(response){
             console.log(response);

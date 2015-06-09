@@ -22,15 +22,16 @@ iktProekt.controller('doctorController', function ($scope, loginService, mainSer
     }
 
     $scope.changeDoctor = function () {
-        console.log("--doktor: ");
+
         var data = {};
         data.patient = authenticationService.getCurrentUser();
         data.doctor = $scope.newDoctor;
 
         console.log(data);
         mainService.changeDoctor(data).success(function () {
-            console.log("Doctor changed successfully");
+            console.log("Doctor changed SUCCESSfully");
             $scope.addDoctorState = false;
+            alert("Вашето барање за промена на матичен доктор е испратено. Наскоро ќе добиете одговор од надлежните лица! ")
             $state.go('patient.doctor', {}, {reload: true});
         });
 

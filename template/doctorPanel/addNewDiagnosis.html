@@ -1,54 +1,102 @@
-<div ng-controller="doctorPanelController" >
+<div ng-controller="doctorPanelController">
     <div class="row">
         <div class="col-sm-10" style="margin: auto">
             <div class="panel panel-info">
-                <div class="panel-heading font-bold">Форма за внесување дијагноза </div>
+                <div class="panel-heading font-bold">Форма за внесување дијагноза</div>
                 <div class="panel-body">
                     <form novalidate>
                         <div class="form-group ">
-                            <labell>Дата на издавање на дијагнозата</labell>
-                            <input type="date" ng-model="diagnosis.data" class="form-control"
+                            <label>Дата на издавање на дијагнозата</label>
+                            <input type="date" ng-model="diagnosis.createdAt" class="form-control"
                                    placeholder="Дата на издавање на дијагнозата">
                         </div>
                         <div class="form-group">
 
                             <labell>Пациент</labell>
-                            <input type="text" class="form-control" ng-show="selectedAppointmentState" value= "{{selectedAppointment.patient.firstName+ ' ' + selectedAppointment.patient.lastName}}" readonly>
-                            <select class="form-control" ng-model="diagnosis.patient.id" ng-show="!selectedAppointmentState"
+                            <input type="text" class="form-control" ng-show="selectedAppointmentState"
+                                   value="{{selectedAppointment.patient.firstName+ ' ' + selectedAppointment.patient.lastName}}"
+                                   readonly>
+                            <select class="form-control" ng-model="diagnosis.patient.id"
+                                    ng-show="!selectedAppointmentState"
                                     ng-options="patient.id as patient.firstName + ' ' + patient.lastName for patient in allPacientsForDoctor"></select>
                         </div>
                         <div class="form-group">
 
-                            <labell>Дијагноза</labell><br>
-                           <textarea ng-model="diagnosis.diagnosis" rows="10" class="form-control" >
-
+                            <label>Дијагноза</label><br>
+                           <textarea ng-model="diagnosis.diagnosis" rows="10" class="form-control">
 
                            </textarea>
                         </div>
 
 
-                        <button class="btn btn-info" ng-click="prscription=!prscription">Додади рецепта</button>
-
-
-
-                        <div class="form-group" ng-show="prscription==true">
-                            <br>                            <br>
-
-                            <label>Додади лек во рецептата:</label>
-
-
-                            <select class="form-control" ng-model="data.medId"
-                                    ng-options="medication.id as medication.name  for medication in allMedications"></select>
-
-
+                        <div class="form-group">
+                            <button class="btn btn-primary" ng-click="prscription=!prscription">
+                                Внеси рецепти</button>
                         </div>
 
+                        <div ng-show="prscription==true">
+                        <div class="form-group panel panel-primary b-2x">
+                            <div class="panel-body">
 
+                        <div class="form-group">
+                            <div class="table-responsive " ng-hide="!perscriptions.length">
+                                <table class="table table-striped b-t b-light">
+                                    <thead>
+                                    <tr>
+                                        <th>Лек</th>
+                                        <th>Начин на употреба</th>
+                                        <th></th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
 
+                                    <tr ng-repeat="perscription in perscriptions">
+                                        <td>{{perscription.medication.name }}</td>
+                                        <td>{{perscription.description}}</td>
+                                        <td>
+                                            <a ng-click="removePerscription(perscription.id)">
+                                                <i class="glyphicon   glyphicon-remove icon text-danger-dker"></i>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
 
+                                <div class="form-group col-sm-8">
 
-                        <button type="submit" class="btn btn-sm btn-info pull-right"  ng-click="addDiagnosis(diagnosis, data.medId)">Потврди</button>
+                                    </div>
 
+                                <div class="form-group col-sm-8">
+                                    <label class="pull-left"><b>Додади лек во рецептата:</b></label>
+                                    <label class="pull-right"><b>Начин на употреба:</b></label>
+                                </div>
+                                <div class="form-group col-sm-6">
+                                    <select class="form-control b-primary " ng-model="perscription.medication"
+                                            ng-options="medication as medication.name  for medication in allMedications"></select>
+                                </div>
+                                <div class="form-group col-sm-6">
+
+                                <textarea ng-model="perscription.description" rows="5" class="form-control b-primary">
+                                </textarea>
+                                </div>
+
+                                <div class="form-group col-sm-6 pull-right">
+                                    <button type="submit" class="btn btn-primary pull-right"
+                                            ng-click="addPerscription(perscription)">
+                                        <i class="glyphicon    glyphicon-plus icon text-left"></i>
+                                        Додади
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                            </div>
+                        <div class="form-group pull-right">
+                            <button type="submit" class="btn btn-addon btn-info"
+                                    ng-click="addDiagnosis(diagnosis)">Зачувај дијагноза
+                            </button>
+                        </div>
                     </form>
                 </div>
             </div>
