@@ -36,7 +36,7 @@
                             <div class="panel-heading">РЕЦЕПТ </div>
                             <div class="panel-body">
 
-                                Лекови кои му се препишани на пациентот <i>{{ p.diagnose.patient.firstName }} {{ p.diagnose.patient.lastName }} </i> на дата {{ p.createdAt}} <br>
+                                Лекови кои му се препишани на пациентот <i>{{ p.diagnose.patient.firstName }} {{ p.diagnose.patient.lastName }} </i> на дата {{ p.createdAt  |  date : format : timezone }} <br>
                                 <br><br>
 
                                 -  <i class="text-md">{{ p.medication.name }}</i> од производител <i>{{ p.medication.company }}</i>
