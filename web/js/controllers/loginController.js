@@ -37,6 +37,7 @@ iktProekt.controller('loginController', function ($cookies, $scope, loginService
            }
         }).error(function (e) {
             console.log(e);
+            alert("Внесовте невалидно корисничко име или лозинка! Пробајте повторно!")
         });
     }
 
